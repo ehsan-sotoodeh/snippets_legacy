@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import storeFactory from './store/middleware';
+import { Provider } from 'react-redux'
+import './styles/style.css';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
