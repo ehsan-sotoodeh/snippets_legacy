@@ -17,3 +17,5 @@ const constants = {
         SERVER_URL : "http://dev.sotoodeh.pro:3000/"
     }
 }
+
+export default constants
