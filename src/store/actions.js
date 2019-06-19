@@ -1,18 +1,35 @@
 import C from './constants'
 import fetch from 'isomorphic-fetch'
 import { SnippetService } from '../services/snippet.service'
-import { CategoryService } from '../services/category.service'
 let serverURL = C.VIEW.SERVER_URL;
 
 
 export const fetchAllSnippets = () => async (dispatch , getState) =>{
+
     try{
-        let snippets = await SnippetService.fetchAll();
+        let snippets = await SnippetService.fetchAllSnippets();
         dispatch({
             type: C.SNIPPETS.FETCH_ALL,
             payload: snippets
         });
     }catch(error){
+        console.log(error)
+        return new Error(error)
+
+    }
+}
+export const fetchOneSnippetById = (snippetId) => async (dispatch , getState) =>{
+
+    try{
+        // Tooie action ham is hammon service ke gofti estefadeh kardam
+        let snippet = await SnippetService.fetchOneSnippetById(snippetId);
+        console.log(snippet.length)
+        dispatch({
+            type: C.SNIPPETS.FTECH_BY_ID,
+            payload: snippet
+        });
+    }catch(error){
+        console.log("..."+error)
         return new Error(error)
 
     }

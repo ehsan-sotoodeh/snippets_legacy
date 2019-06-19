@@ -1,11 +1,5 @@
 {
     "snippets" : [
-        {
-            "id" : 1,
-            "title" : "sss",
-            "keywords" : "",
-            "content" : ""
-        }
     ],
     "keywords" : ["keyword1","keyword2","keyword2","keyword3"],
     "view" : {

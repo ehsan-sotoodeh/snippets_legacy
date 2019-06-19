@@ -7,7 +7,7 @@ export const snippets = (state = {},action)=>{
             return state = [...action.payload];
 
         case C.SNIPPETS.FTECH_BY_ID :
-            return state = [...state,...action.payload];
+            return state = [...state,action.payload];
 
         case C.SNIPPETS.FETCH_BY_SEARCH_TERM:
             return state = [...action.payload];
