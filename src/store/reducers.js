@@ -1,13 +1,16 @@
 import C from './constants'
 import {combineReducers} from 'redux'
+import initialState from './initialState.json'
 
-export const snippets = (state = {},action)=>{
+
+export const snippets = (state = initialState,action)=>{
     switch(action.type){
         case C.SNIPPETS.FETCH_ALL :
             return state = [...action.payload];
 
         case C.SNIPPETS.FTECH_BY_ID :
-            return state = [...state,action.payload];
+            console.log({snippets : [...state,action.payload]})
+            return [...state,action.payload];
 
         case C.SNIPPETS.FETCH_BY_SEARCH_TERM:
             return state = [...action.payload];

@@ -23,13 +23,11 @@ export const fetchOneSnippetById = (snippetId) => async (dispatch , getState) =>
     try{
         // Tooie action ham is hammon service ke gofti estefadeh kardam
         let snippet = await SnippetService.fetchOneSnippetById(snippetId);
-        console.log(snippet.length)
         dispatch({
             type: C.SNIPPETS.FTECH_BY_ID,
             payload: snippet
         });
     }catch(error){
-        console.log("..."+error)
         return new Error(error)
 
     }
