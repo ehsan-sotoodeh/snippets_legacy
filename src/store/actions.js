@@ -32,6 +32,33 @@ export const fetchOneSnippetById = (snippetId) => async (dispatch , getState) =>
 
     }
 }
+export const deleteSnippet = (snippetId) => async (dispatch , getState) =>{
+
+    // try{
+    //     let snippet = await SnippetService.fetchOneSnippetById(snippetId);
+    //     dispatch({
+    //         type: C.SNIPPETS.DELETE_ONE_BY_ID,
+    //         payload: snippet
+    //     });
+    // }catch(error){
+    //     return new Error(error)
+
+    // }
+}
+export const updateSnippet = (snippet) => async (dispatch , getState) =>{
+
+    try{
+        console.log(snippet)
+        let resultSnippet = await SnippetService.updateSnippetById(snippet);
+        dispatch({
+            type: C.SNIPPETS.UPDATE_ONE_BY_ID,
+            payload: resultSnippet
+        });
+    }catch(error){
+        return new Error(error)
+
+    }
+}
 
 
 

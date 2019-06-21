@@ -9,7 +9,6 @@ export const snippets = (state = initialState,action)=>{
             return state = [...action.payload];
 
         case C.SNIPPETS.FTECH_BY_ID :
-            console.log({snippets : [...state,action.payload]})
             return [...state,action.payload];
 
         case C.SNIPPETS.FETCH_BY_SEARCH_TERM:
@@ -19,7 +18,10 @@ export const snippets = (state = initialState,action)=>{
             return state = [...state,...action.payload];
 
         case C.SNIPPETS.UPDATE_ONE_BY_ID:
-            return state = [...state,...action.payload];
+                let newState = state.filter(snippet =>{
+                    return snippet.id !== action.payload.id
+                })
+            return [...newState,action.payload];
 
         case C.SNIPPETS.DELETE_ONE_BY_ID:
             return state = [...state,...action.payload];

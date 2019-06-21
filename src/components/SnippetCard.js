@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 
 
 const SnippetCard = ({snippet}) => {
-    console.log(snippet)
     return (
         <div>
             <NavLink snippet={snippet} exact to={`/snippet/${snippet.id}`}> 

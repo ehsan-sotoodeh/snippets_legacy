@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {connect } from 'react-redux'
-import {fetchAllSnippets,fetchOneSnippetById} from '../store/actions'
+import {fetchAllSnippets,fetchOneSnippetById,deleteSnippet,updateSnippet} from '../store/actions'
 import { NavLink } from "react-router-dom";
 
 const mapStateToProps = (state) =>{
@@ -13,6 +13,12 @@ const mapDispatchToProps = dispatch => {
     return{
         fetchOneSnippetById(activeSnippet){
             dispatch(fetchOneSnippetById(activeSnippet))
+        },
+        deleteSnippet(activeSnippet){
+            dispatch(deleteSnippet(activeSnippet))
+        },
+        updateSnippet(snippet){
+            dispatch(updateSnippet(snippet))
         }
     }
 }
@@ -22,11 +28,11 @@ class SnippetPage extends Component {
         super(props);
         this.state = {editableMoudules : [] , editedVersion : {"title":"","keywords":"","content":""}}
         this.activeSnippet  = parseInt(this.props.match.params.snippetId);
-        let snippet = this.props.snippets.filter(snippet =>{
+        this.snippet = this.props.snippets.filter(snippet =>{
                 return snippet.id === this.activeSnippet;
             })[0]; 
-        if(snippet === undefined){
-            this.props.fetchOneSnippetById(this.activeSnippet);
+        if(this.snippet === undefined){
+            this.props.fetchOneSnippetById(this.activeSnippet)
         }
       }
 
@@ -51,35 +57,41 @@ class SnippetPage extends Component {
         let editedVersion = this.state.editedVersion;
         editedVersion[moduleName] = moduleNewContent;
         this.setState({"editedVersion":editedVersion})
-        console.log(this.state);
-        // let editedModules = this.state.editedModules.filter(obj =>{
-        //     console.log(obj.moduleName,moduleName)
-        //     if(obj.moduleName !== moduleName)
-        //         return obj
-        // });
-        // console.log(editedModules)
+    }
+    updateSnippet = () =>{
+        let editedVersion = this.state.editedVersion;
+        let outputSnippet = {};
+        outputSnippet["id"] = this.activeSnippet
+        outputSnippet["title"] = (editedVersion.title.length > 0) ? editedVersion.title : this.snippet.title;
+        outputSnippet["keywords"] = (editedVersion.keywords.length > 0) ? editedVersion.keywords : this.snippet.keywords;
+        outputSnippet["content"] = (editedVersion.content.length > 0) ? editedVersion.content : this.snippet.content;
+        this.props.updateSnippet(outputSnippet);
+        this.setState({"editableMoudules":[], "editedVersion" :  {"title":"","keywords":"","content":""} })
 
-        // this.setState({editedModules :[...editedModules,{"moduleName" : moduleName , "content" : moduleNewContent}]});
-        // console.log(this.state.editedModules)
-
-
+    }
+    refreshSnippet = () =>{
+        console.log("refreshSnippet",this.activeSnippet);
+    }
+    deleteSnippet = () =>{
+        console.log("deleteSnippet",this.activeSnippet);
     }
 
 
 
     render() {
-        let snippet = this.props.snippets.filter(snippet =>{
+        console.log("render")
+        this.snippet = this.props.snippets.filter(snippet =>{
             return snippet.id === this.activeSnippet;
         })[0]; 
 
 
-        if(snippet === undefined){
+        if(this.snippet === undefined){
             return( <h1> Loading... </h1> )
         }
         
 
-        let keywords = snippet.keywords;
-        let content = snippet.content;
+        let keywords = this.snippet.keywords;
+        let content = this.snippet.content;
 
         return (
             <div>
@@ -93,36 +105,37 @@ class SnippetPage extends Component {
                 <button onClick={()=>{this.enableEdit('content')}}> Edit content</button>
                 <br/>
                 <br/>
-                <h1>
+                
                 <TitleModuleJsx 
-                    title={snippet.title} 
+                    title={this.snippet.title} 
                     isEditable={this.state.editableMoudules.includes('title')}
                     editedTitle = {this.state.editedVersion.title}
                     handelEdit = {this.handelEdit}
                      />
 
-                </h1>
 
-                <h3>
                 <KeywordsModuleJsx 
-                    keywords={snippet.keywords} 
+                    keywords={this.snippet.keywords} 
                     isEditable={this.state.editableMoudules.includes('keywords')}
                     editedKeywords = {this.state.editedVersion.keywords}
                     handelEdit = {this.handelEdit}
                      />
                     
-                </h3>
-                <p>
                     <ContentModuleJsx 
-                    content={snippet.content} 
+                    content={this.snippet.content} 
                     isEditable={this.state.editableMoudules.includes('content')}
                     editedContent = {this.state.editedVersion.content}
                     handelEdit = {this.handelEdit}
                      />
 
-                </p>
-                    
-                
+                <br/>
+                <br/>
+                <br/>
+                <hr/>
+                <button onClick={()=>{this.updateSnippet()}}>Update</button>
+                <button onClick={()=>{this.refreshSnippet()}}>Refresh</button>
+                <button onClick={()=>{this.deleteSnippet()}}>Delete</button>
+
             </div>
         )
     }
@@ -163,9 +176,9 @@ function ContentModuleJsx({content,isEditable,handelEdit,editedContent}) {
         )
     }
     return(
-        <h1>
+        <p>
             {content}
-        </h1>
+        </p>
     )
 }
 

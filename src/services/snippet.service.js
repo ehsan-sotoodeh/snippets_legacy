@@ -21,18 +21,19 @@ class SnippetService  {
         try {
             const url = `${this.serverURL}/snippet/${snippetId}`;
 
-            let snippet = await axios.get(url)
-            // .then(function (response) {
-            //     console.log(response);
-            //     snippet = response.json();
-            //     return snippet;
-            // })
-            // .catch(function (error) {
-            //     console.log(error);
-            //     //throw new Error(error)
-    
-            // });
-            console.log( snippet.data)
+            let snippet = await axios.get(url);
+            return snippet.data
+        } catch (error) {
+            console.log(error)
+        }
+
+    }
+    async updateSnippetById(inputSnippet) {
+        try {
+            //http://93.188.167.131:3000/snippet?id=5&title=myNewTitle&keywords=MyList Of keywords&content=My dummy content
+            let inputSnippetString = urlfy(inputSnippet);
+            const url = `${this.serverURL}/snippet/snippet?${inputSnippetString}`;
+            let snippet = await axios.put(url)
             return snippet.data
         } catch (error) {
             console.log(error)
@@ -41,6 +42,11 @@ class SnippetService  {
     }
 
 }
+
+const urlfy = obj => Object
+    .keys(obj)
+    .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(obj[k]))
+    .join('&');
 
 const _SnippetService = new SnippetService();
 export { _SnippetService as SnippetService };
