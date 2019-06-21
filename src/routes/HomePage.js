@@ -6,10 +6,11 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
+import Row from 'react-bootstrap/Row';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons'; 
+import { faSearch,faPlus } from '@fortawesome/free-solid-svg-icons'; 
 
-const SEARCHBOX_DELAY = 3500; // add to settings file
+const SEARCHBOX_DELAY = 500; // add to settings file
 
 const mapStateToProps = (state) =>{
     return {
@@ -67,13 +68,21 @@ class HomePage extends Component {
         })
         return (
             <div>
-                <br/>
-
-                <SearchJsx handleSubmit={this.handleSubmit} handleSearchInput={this.handleSearchInput} doSearch={this.doSearch} />
-                <h1>
-                    This is home Page
-                </h1>
-                {snippetsJsx}
+                <Row className={"my-2 p-0  border-secondary border-bottom justify-content-start"}>
+                    <Col  md={2}>
+                        <Button variant={'success'} ><FontAwesomeIcon icon={faPlus} /> Add New...</Button>
+                    </Col>
+                    <Col  md={6}>
+                    <SearchJsx 
+                            
+                            handleSubmit={this.handleSubmit} 
+                            handleSearchInput={this.handleSearchInput} 
+                            doSearch={this.doSearch} />
+                    </Col>
+                </Row>
+                <div className="row mx-3">
+                    {snippetsJsx}
+                </div>
             </div>
         )
     }
@@ -82,13 +91,13 @@ class HomePage extends Component {
 function SearchJsx({handleSubmit,handleSearchInput,doSearch}){
     return (
         <Form
+        className={'w-100 d-flex justify-content-start'}
             noValidate
             onSubmit={handleSubmit}
         >
-            <Form.Row>
 
 
-            <Form.Group as={Col} md="4" controlId="validationCustomUsername">
+            <Form.Group as={Col} controlId="validationCustomUsername">
                 <InputGroup>
 
                 <Form.Control
@@ -106,7 +115,6 @@ function SearchJsx({handleSubmit,handleSearchInput,doSearch}){
 
                 </InputGroup>
             </Form.Group>
-            </Form.Row>
         </Form>
     )
 }
