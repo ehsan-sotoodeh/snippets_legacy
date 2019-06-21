@@ -59,6 +59,20 @@ export const updateSnippet = (snippet) => async (dispatch , getState) =>{
 
     }
 }
+export const searchSnippets = (SearchTerm) => async (dispatch , getState) =>{
+
+    try{
+        console.log(SearchTerm)
+        let resultSnippet = await SnippetService.searchSnippets(SearchTerm);
+        dispatch({
+            type: C.SNIPPETS.FETCH_BY_SEARCH_TERM,
+            payload: resultSnippet
+        });
+    }catch(error){
+        return new Error(error)
+
+    }
+}
 
 
 

@@ -16,6 +16,7 @@ const constants = {
         SET_ACTIVE_SNIPPET : "SET_ACTIVE_SNIPPET",
         SERVER_URL : "http://dev.sotoodeh.pro:3000"
     }
+
 }
 
 export default constants

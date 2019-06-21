@@ -6,6 +6,8 @@ import * as serviceWorker from './serviceWorker';
 import storeFactory from './store/middleware';
 import { Provider } from 'react-redux'
 import './styles/style.css';
+import './styles/bootstrap.min.css';
+
 
 const store = storeFactory();
 
