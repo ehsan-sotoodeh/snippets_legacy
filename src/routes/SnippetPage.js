@@ -46,8 +46,6 @@ class SnippetPage extends Component {
     enableEdit = (inputModule) =>{
         let editedModules = [...this.state.editableMoudules,inputModule]
         this.setState({editableMoudules :editedModules});
-        console.log(inputModule)
-        console.log(this.state)
     }
     handelEdit = (event) =>{
         console.log(event.target);
@@ -70,10 +68,14 @@ class SnippetPage extends Component {
 
     }
     refreshSnippet = () =>{
-        console.log("refreshSnippet",this.activeSnippet);
+        this.setState({"editableMoudules":[], "editedVersion" :  {"title":"","keywords":"","content":""} })
     }
     deleteSnippet = () =>{
-        console.log("deleteSnippet",this.activeSnippet);
+        console.log("deleteSnippet")
+
+        this.props.deleteSnippet(this.activeSnippet);
+        this.props.history.push("/");
+
     }
 
 

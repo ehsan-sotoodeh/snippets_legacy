@@ -34,16 +34,16 @@ export const fetchOneSnippetById = (snippetId) => async (dispatch , getState) =>
 }
 export const deleteSnippet = (snippetId) => async (dispatch , getState) =>{
 
-    // try{
-    //     let snippet = await SnippetService.fetchOneSnippetById(snippetId);
-    //     dispatch({
-    //         type: C.SNIPPETS.DELETE_ONE_BY_ID,
-    //         payload: snippet
-    //     });
-    // }catch(error){
-    //     return new Error(error)
+    try{
+        let snippet = await SnippetService.deleteSnippet(snippetId);
+        dispatch({
+            type: C.SNIPPETS.DELETE_ONE_BY_ID,
+            payload: snippet
+        });
+    }catch(error){
+        return new Error(error)
 
-    // }
+    }
 }
 export const updateSnippet = (snippet) => async (dispatch , getState) =>{
 

@@ -4,6 +4,7 @@ import initialState from './initialState.json'
 
 
 export const snippets = (state = initialState,action)=>{
+    let newState = []
     switch(action.type){
         case C.SNIPPETS.FETCH_ALL :
             return state = [...action.payload];
@@ -18,13 +19,17 @@ export const snippets = (state = initialState,action)=>{
             return state = [...state,...action.payload];
 
         case C.SNIPPETS.UPDATE_ONE_BY_ID:
-                let newState = state.filter(snippet =>{
-                    return snippet.id !== action.payload.id
-                })
+            newState = state.filter(snippet =>{
+                return snippet.id !== action.payload.id
+            })
             return [...newState,action.payload];
 
         case C.SNIPPETS.DELETE_ONE_BY_ID:
-            return state = [...state,...action.payload];
+            let deletedId = parseInt(action.payload);
+            newState = state.filter(snippet =>{
+                return snippet.id !== deletedId
+            })
+            return state = [...newState];
             
         default:
             return state;
