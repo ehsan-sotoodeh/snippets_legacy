@@ -7,6 +7,7 @@ import storeFactory from './store/middleware';
 import { Provider } from 'react-redux'
 import './styles/style.css';
 import './styles/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.css';
 
 
 const store = storeFactory();

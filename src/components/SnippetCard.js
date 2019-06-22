@@ -5,13 +5,11 @@ import Badge from 'react-bootstrap/Badge';
 
 
 const SnippetCard = ({snippet}) => {
-    let keywordsArray = snippet.keywords.split(" ");
-    console.log(keywordsArray)
-    let keywordsJsx = keywordsArray.map(keyword =>{
+
+    let keywordsJsx = snippet.keywords.split(" ").map((keyword,index) =>{
         return(
-            <Badge className="fontSize08 mx-1 padding05 " pill variant="info ">
-                {keyword}
-            </Badge>
+            <span key={"badge-pill" + index} className="fontSize08 mx-1 padding05 badge badge-pill badge-primary ">{keyword}</span>
+
         )
     });
 

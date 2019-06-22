@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import {connect } from 'react-redux'
 import {fetchAllSnippets,fetchOneSnippetById,deleteSnippet,updateSnippet} from '../store/actions'
 import { NavLink } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHome,faUndo,faPen,faTimes,faCloudUploadAlt } from '@fortawesome/free-solid-svg-icons';
+
 
 const mapStateToProps = (state) =>{
     return {
@@ -96,47 +99,66 @@ class SnippetPage extends Component {
         let content = this.snippet.content;
 
         return (
-            <div>
-                <NavLink exact to={`/`}> Home
-                </NavLink>
-                <br/>
-                <hr/>
-                <br/>
-                <button onClick={()=>{this.enableEdit('title')}}> Edit title</button>
-                <button onClick={()=>{this.enableEdit('keywords')}}> Edit keywords</button>
-                <button onClick={()=>{this.enableEdit('content')}}> Edit content</button>
-                <br/>
-                <br/>
+            <div className="snippetPage">
+
+                <div className="border-secondary border-bottom mb-1  ">
+                    <div className="container d-flex bd-highlight ">
+                        <div className="mr-auto p-2 bd-highlight">
+                        <NavLink className="btn btn-primary" exact to={`/`}><FontAwesomeIcon icon={faHome} /> Home </NavLink>
+                        </div>
+                        <div className="p-2 bd-highlight">
+                            <button className="btn btn-info " onClick={()=>{this.updateSnippet()}}> <FontAwesomeIcon icon={faCloudUploadAlt} />&nbsp; &nbsp; Update </button>
+                        </div>
+                        <div className="p-2 bd-highlight">
+                            <button className="btn btn-warning" onClick={()=>{this.refreshSnippet()}}> <FontAwesomeIcon icon={faUndo} />&nbsp; &nbsp;  Reset</button> 
+                        </div>
+                        <div className="p-2 bd-highlight">
+                            <button className="btn btn-danger " onClick={()=>{this.deleteSnippet()}} > <FontAwesomeIcon icon={faTimes} />&nbsp; &nbsp;  Delete</button>
+                        </div>
+                    </div>
                 
-                <TitleModuleJsx 
-                    title={this.snippet.title} 
-                    isEditable={this.state.editableMoudules.includes('title')}
-                    editedTitle = {this.state.editedVersion.title}
-                    handelEdit = {this.handelEdit}
-                     />
+                </div>
+
+                <div className="mx-3">
+                    <div className="editableElement">
+                        <TitleModuleJsx 
+                            title={this.snippet.title} 
+                            isEditable={this.state.editableMoudules.includes('title')}
+                            editedTitle = {this.state.editedVersion.title}
+                            handelEdit = {this.handelEdit}
+                            />
+                            <button className="btn btn-outline-success btn-sm showHideToggle" onClick={()=>{this.enableEdit('title')}}><FontAwesomeIcon icon={faPen} /></button>
 
 
-                <KeywordsModuleJsx 
-                    keywords={this.snippet.keywords} 
-                    isEditable={this.state.editableMoudules.includes('keywords')}
-                    editedKeywords = {this.state.editedVersion.keywords}
-                    handelEdit = {this.handelEdit}
-                     />
+                    </div>
+
+                    <div className="editableElement">
+                        <KeywordsModuleJsx 
+                            keywords={this.snippet.keywords} 
+                            isEditable={this.state.editableMoudules.includes('keywords')}
+                            editedKeywords = {this.state.editedVersion.keywords}
+                            handelEdit = {this.handelEdit}
+                            />
+                            <button className="btn btn-outline-success btn-sm showHideToggle" onClick={()=>{this.enableEdit('keywords')}}><FontAwesomeIcon icon={faPen} /></button>
+
+                    </div>
+
+                    <div className="editableElement">
+                        <ContentModuleJsx 
+                            content={this.snippet.content} 
+                            isEditable={this.state.editableMoudules.includes('content')}
+                            editedContent = {this.state.editedVersion.content}
+                            handelEdit = {this.handelEdit}
+                            />
+                            <button className="btn btn-outline-success btn-sm showHideToggle" onClick={()=>{this.enableEdit('content')}}><FontAwesomeIcon icon={faPen} /></button>
+
+                    </div>
                     
-                    <ContentModuleJsx 
-                    content={this.snippet.content} 
-                    isEditable={this.state.editableMoudules.includes('content')}
-                    editedContent = {this.state.editedVersion.content}
-                    handelEdit = {this.handelEdit}
-                     />
 
-                <br/>
-                <br/>
-                <br/>
-                <hr/>
-                <button onClick={()=>{this.updateSnippet()}}>Update</button>
-                <button onClick={()=>{this.refreshSnippet()}}>Refresh</button>
-                <button onClick={()=>{this.deleteSnippet()}}>Delete</button>
+                </div>
+
+
+
 
             </div>
         )
@@ -164,9 +186,15 @@ function KeywordsModuleJsx({keywords,isEditable,handelEdit,editedKeywords}) {
             <input type="text" name="keywords" value={keywordsValue} onChange={handelEdit}/>
         )
     }
+    let keywordsJsx = keywords.split(" ").map((keyword,index) =>{
+        return(
+            <span key={"badge-pill" + index} className="fontSize08 mx-1 padding05 badge badge-pill badge-primary ">{keyword}</span>
+
+        )
+    });
     return(
         <h1>
-            {keywords}
+            {keywordsJsx}
         </h1>
     )
 }
@@ -174,7 +202,7 @@ function ContentModuleJsx({content,isEditable,handelEdit,editedContent}) {
     if(isEditable){
         let contentValue = (editedContent.length > 0 )? editedContent : content;
         return (
-            <input type="text" name="content" value={contentValue} onChange={handelEdit}/>
+            <textarea  type="text" name="content"  onChange={handelEdit}>{contentValue}</textarea>
         )
     }
     return(
