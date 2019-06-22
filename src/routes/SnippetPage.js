@@ -4,6 +4,7 @@ import {fetchAllSnippets,fetchOneSnippetById,deleteSnippet,updateSnippet} from '
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome,faUndo,faPen,faTimes,faCloudUploadAlt } from '@fortawesome/free-solid-svg-icons';
+import RichEditorExample from '../components/RichEditorExample'
 
 
 const mapStateToProps = (state) =>{
@@ -158,7 +159,7 @@ class SnippetPage extends Component {
                 </div>
 
 
-
+                <RichEditorExample content={this.snippet.content} />
 
             </div>
         )
