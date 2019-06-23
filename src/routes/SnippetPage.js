@@ -52,10 +52,10 @@ class SnippetPage extends Component {
         this.setState({editableMoudules :editedModules});
     }
     handelEdit = (event) =>{
-        console.log(event.target);
 
         let moduleName = event.target.name;
         let moduleNewContent = event.target.value;
+
         let editedVersion = this.state.editedVersion;
         editedVersion[moduleName] = moduleNewContent;
         this.setState({"editedVersion":editedVersion})
@@ -75,8 +75,6 @@ class SnippetPage extends Component {
         this.setState({"editableMoudules":[], "editedVersion" :  {"title":"","keywords":"","content":""} })
     }
     deleteSnippet = () =>{
-        console.log("deleteSnippet")
-
         this.props.deleteSnippet(this.activeSnippet);
         this.props.history.push("/");
 
@@ -95,14 +93,12 @@ class SnippetPage extends Component {
             return( <h1> Loading... </h1> )
         }
         
-
-        let keywords = this.snippet.keywords;
-        let content = this.snippet.content;
+        console.log(this.state.editableMoudules.includes('content'))
 
         return (
             <div className="snippetPage">
 
-                <div className="border-secondary border-bottom mb-1  ">
+                <div className=" mb-1  bg-dark ">
                     <div className="container d-flex bd-highlight ">
                         <div className="mr-auto p-2 bd-highlight">
                         <NavLink className="btn btn-primary" exact to={`/`}><FontAwesomeIcon icon={faHome} /> Home </NavLink>
@@ -121,29 +117,29 @@ class SnippetPage extends Component {
                 </div>
 
                 <div className="mx-3">
-                    <div className="editableElement">
+                    <div className="editableElement position-relative">
                         <TitleModuleJsx 
                             title={this.snippet.title} 
                             isEditable={this.state.editableMoudules.includes('title')}
                             editedTitle = {this.state.editedVersion.title}
                             handelEdit = {this.handelEdit}
                             />
-                            <button className="btn btn-outline-success btn-sm showHideToggle" onClick={()=>{this.enableEdit('title')}}><FontAwesomeIcon icon={faPen} /></button>
+                            <button className="editBtn btn btn-outline-success btn-sm showHideToggle" onClick={()=>{this.enableEdit('title')}}><FontAwesomeIcon icon={faPen} /></button>
 
 
                     </div>
 
-                    <div className="editableElement">
+                    <div className="editableElement position-relative">
                         <KeywordsModuleJsx 
                             keywords={this.snippet.keywords} 
                             isEditable={this.state.editableMoudules.includes('keywords')}
                             editedKeywords = {this.state.editedVersion.keywords}
                             handelEdit = {this.handelEdit}
                             />
-                            <button className="btn btn-outline-success btn-sm showHideToggle" onClick={()=>{this.enableEdit('keywords')}}><FontAwesomeIcon icon={faPen} /></button>
+                            <button className="editBtn btn btn-outline-success btn-sm showHideToggle" onClick={()=>{this.enableEdit('keywords')}}><FontAwesomeIcon icon={faPen} /></button>
 
                     </div>
-
+{/* 
                     <div className="editableElement">
                         <ContentModuleJsx 
                             content={this.snippet.content} 
@@ -153,14 +149,22 @@ class SnippetPage extends Component {
                             />
                             <button className="btn btn-outline-success btn-sm showHideToggle" onClick={()=>{this.enableEdit('content')}}><FontAwesomeIcon icon={faPen} /></button>
 
-                    </div>
+                    </div> */}
                     
 
                 </div>
 
+                <div className="editableElement position-relative">
 
-                <RichEditorExample content={this.snippet.content} />
+                    <RichEditorExample 
+                        content={this.snippet.content} 
+                        handelEdit={this.handelEdit}
+                        textAlignment  = "left"
+                        readOnly = {!this.state.editableMoudules.includes('content')}
+                        />
+                        <button className="editBtn btn btn-outline-success btn-sm showHideToggle" onClick={()=>{this.enableEdit('content')}}><FontAwesomeIcon icon={faPen} /></button>
 
+                </div>
             </div>
         )
     }
@@ -170,13 +174,13 @@ function TitleModuleJsx({title,isEditable,handelEdit,editedTitle}) {
     if(isEditable){
         let titleValue = (editedTitle.length > 0 )? editedTitle : title;
         return (
-            <input type="text" name="title" value={titleValue} onChange={handelEdit}/>
+            <input type="text" name="title" className="w-100" value={titleValue} onChange={handelEdit}/>
         )
     }
     return(
-        <h1>
+        <h2 className="position-relative">
             {title}
-        </h1>
+        </h2>
     )
     
 }
@@ -184,12 +188,12 @@ function KeywordsModuleJsx({keywords,isEditable,handelEdit,editedKeywords}) {
     if(isEditable){
         let keywordsValue = (editedKeywords.length > 0 )? editedKeywords : keywords;
         return (
-            <input type="text" name="keywords" value={keywordsValue} onChange={handelEdit}/>
+            <input type="text" name="keywords" className="w-100" value={keywordsValue} onChange={handelEdit}/>
         )
     }
     let keywordsJsx = keywords.split(" ").map((keyword,index) =>{
         return(
-            <span key={"badge-pill" + index} className="fontSize08 mx-1 padding05 badge badge-pill badge-primary ">{keyword}</span>
+            <span key={"badge-pill" + index} className="fontSize07 mx-1 padding05 badge badge-pill badge-success ">{keyword}</span>
 
         )
     });

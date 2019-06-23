@@ -1,12 +1,12 @@
 import React from 'react'
 import { NavLink } from "react-router-dom";
-import {Editor, EditorState, RichUtils, ContentState ,convertFromHTML} from 'draft-js';
+import {Editor, EditorState, RichUtils, ContentState ,convertFromHTML,convertToRaw} from 'draft-js';
+import {stateToHTML} from 'draft-js-export-html';
 
 
 class RichEditorExample extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props.content)
     this.state = {editorState: EditorState.createWithContent(
       ContentState.createFromBlockArray(
         convertFromHTML(this.props.content)
@@ -14,7 +14,17 @@ class RichEditorExample extends React.Component {
     )};
 
     this.focus = () => this.refs.editor.focus();
-    this.onChange = (editorState) => this.setState({editorState});
+    this.onChange = (editorState) => {
+      this.setState({editorState});
+      let target = {};
+      let html = stateToHTML(this.state.editorState.getCurrentContent());
+      target.name = "content";
+      target.value = html;
+      this.props.handelEdit({target})
+    };
+
+    // let moduleName = event.target.name;
+    // let moduleNewContent = event.target.value;
 
     this.handleKeyCommand = (command) => this._handleKeyCommand(command);
     this.onTab = (e) => this._onTab(e);
@@ -67,23 +77,28 @@ class RichEditorExample extends React.Component {
         className += ' RichEditor-hidePlaceholder';
       }
     }
+    console.log(this.props.readOnly)
 
     return (
       <div className="RichEditor-root">
-        <BlockStyleControls
-          editorState={editorState}
-          onToggle={this.toggleBlockType}
-        />
-        <InlineStyleControls
-          editorState={editorState}
-          onToggle={this.toggleInlineStyle}
-        />
-        <div className={className} onClick={this.focus}>
+        <div className="d-flex justify-content-center ">
+          <BlockStyleControls
+            editorState={editorState}
+            onToggle={this.toggleBlockType}
+          />
+          <InlineStyleControls
+            editorState={editorState}
+            onToggle={this.toggleInlineStyle}
+          />
+
+        </div>
+        <div className={className} onClick={this.focus} className="text-left">
           <Editor
             blockStyleFn={getBlockStyle}
             customStyleMap={styleMap}
             editorState={editorState}
             handleKeyCommand={this.handleKeyCommand}
+            readOnly = {this.props.readOnly}
             onChange={this.onChange}
             onTab={this.onTab}
             placeholder="Tell a story..."
@@ -137,9 +152,9 @@ class StyleButton extends React.Component {
 }
 
 const BLOCK_TYPES = [
-  {label: 'H1', style: 'header-one'},
-  {label: 'H2', style: 'header-two'},
-  {label: 'H3', style: 'header-three'},
+  //{label: 'H1', style: 'header-one'},
+  //{label: 'H2', style: 'header-two'},
+ // {label: 'H3', style: 'header-three'},
   {label: 'H4', style: 'header-four'},
   {label: 'H5', style: 'header-five'},
   {label: 'H6', style: 'header-six'},
@@ -174,9 +189,9 @@ const BlockStyleControls = (props) => {
 
 var INLINE_STYLES = [
   {label: 'Bold', style: 'BOLD'},
-  {label: 'Italic', style: 'ITALIC'},
-  {label: 'Underline', style: 'UNDERLINE'},
-  {label: 'Monospace', style: 'CODE'},
+  //{label: 'Italic', style: 'ITALIC'},
+ // {label: 'Underline', style: 'UNDERLINE'},
+  //{label: 'Monospace', style: 'CODE'},
 ];
 
 const InlineStyleControls = (props) => {

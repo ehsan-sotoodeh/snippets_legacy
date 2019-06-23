@@ -8,7 +8,7 @@ const SnippetCard = ({snippet}) => {
 
     let keywordsJsx = snippet.keywords.split(" ").map((keyword,index) =>{
         return(
-            <span key={"badge-pill" + index} className="fontSize08 mx-1 padding05 badge badge-pill badge-primary ">{keyword}</span>
+            <span key={"badge-pill" + index} className="fontSize07 mx-1 padding05 badge badge-pill badge-success">{keyword}</span>
 
         )
     });
