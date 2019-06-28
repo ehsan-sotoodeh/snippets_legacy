@@ -7,9 +7,15 @@ import {stateToHTML} from 'draft-js-export-html';
 class RichEditorExample extends React.Component {
   constructor(props) {
     super(props);
+
+    // if content is empty at an empty tag to content to avoid bug in RichEditor
+    this.content = (this.props.content.length > 0 )? this.props.content : "<br/>";
+
+
+    console.log(this.props.content)
     this.state = {editorState: EditorState.createWithContent(
       ContentState.createFromBlockArray(
-        convertFromHTML(this.props.content)
+        convertFromHTML(this.content)
       )
     )};
 
@@ -77,7 +83,6 @@ class RichEditorExample extends React.Component {
         className += ' RichEditor-hidePlaceholder';
       }
     }
-    console.log(this.props.readOnly)
 
     return (
       <div className="RichEditor-root">

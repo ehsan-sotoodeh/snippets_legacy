@@ -39,6 +39,18 @@ class SnippetService  {
         }
 
     }
+    async saveSnippet(inputSnippet) {
+        try {
+            
+            let inputSnippetString = urlfy(inputSnippet);
+            const url = `${this.serverURL}/snippets?${inputSnippetString}`;
+            let snippet = await axios.post(url);
+            return snippet.data
+        } catch (error) {
+            console.log(error)
+        }
+
+    }
     async deleteSnippet(snippetId) {
         try {
             const url = `${this.serverURL}/snippet/${snippetId}`;

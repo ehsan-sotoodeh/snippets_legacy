@@ -19,6 +19,32 @@
 
 }
 
+.loginDropDown .googleLogin{
+  background-color:#db3236;
+  color:white;
+}
+.loginDropDown .googleLogin:hover{
+  background-color:#b82a2c;
+  color:white;
+}
+.loginDropDown .facebookLogin:hover{
+  background-color:#334d86;
+  color:white;
+}
+.loginDropDown .facebookLogin{
+  background-color:#3b5998;
+  color:white;
+}
+.loginDropDown .twitterLogin:hover{
+  background-color:rgb(50, 146, 219);
+  color:white;
+}
+
+.loginDropDown .twitterLogin{
+  background-color:#38A1F3;
+  color:white;
+}
+
 
 
 .fontSize13{

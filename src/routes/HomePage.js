@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {connect } from 'react-redux'
 import {fetchAllSnippets , searchSnippets} from '../store/actions'
 import SnippetCard from '../components/SnippetCard'
+import SingInSignOut from '../components/SingInSignOut'
 import InputGroup from 'react-bootstrap/InputGroup';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
@@ -9,6 +10,7 @@ import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch,faPlus } from '@fortawesome/free-solid-svg-icons'; 
+import { NavLink } from "react-router-dom";
 
 const SEARCHBOX_DELAY = 500; // add to settings file
 
@@ -70,7 +72,9 @@ class HomePage extends Component {
             <div>
                 <Row className={"my-2 p-0  border-secondary border-bottom justify-content-start"}>
                     <Col  md={2}>
-                        <Button variant={'success'} ><FontAwesomeIcon icon={faPlus} /> Add New...</Button>
+                        <NavLink variant={'success'}  exact to={`/snippet/-1`} >
+                            <FontAwesomeIcon icon={faPlus} /> Add New...
+                        </NavLink>
                     </Col>
                     <Col  md={6}>
                     <SearchJsx 
@@ -78,6 +82,9 @@ class HomePage extends Component {
                             handleSubmit={this.handleSubmit} 
                             handleSearchInput={this.handleSearchInput} 
                             doSearch={this.doSearch} />
+                    </Col>
+                    <Col md={2}>
+                        <SingInSignOut />
                     </Col>
                 </Row>
                 <div className="row mx-3">

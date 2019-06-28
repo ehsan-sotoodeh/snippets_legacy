@@ -15,6 +15,10 @@ const constants = {
     VIEW : {
         SET_ACTIVE_SNIPPET : "SET_ACTIVE_SNIPPET",
         SERVER_URL : "http://dev.sotoodeh.pro:3000"
+    },
+    USER : {
+        USER_LOG_IN : "USER_LOG_IN",
+        USER_LOG_OUT : "USER_LOG_OUT"
     }
 
 }

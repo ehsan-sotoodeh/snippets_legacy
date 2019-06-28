@@ -5,6 +5,9 @@ import initialState from './initialState.json'
 
 export const snippets = (state = initialState,action)=>{
     let newState = []
+    console.log(state)
+    console.log(action.type)
+
     switch(action.type){
         case C.SNIPPETS.FETCH_ALL :
             return state = [...action.payload];
@@ -16,7 +19,7 @@ export const snippets = (state = initialState,action)=>{
             return state = [...action.payload];
 
         case C.SNIPPETS.ADD_NEW:
-            return state = [...state,...action.payload];
+            return state = [...state,action.payload];
 
         case C.SNIPPETS.UPDATE_ONE_BY_ID:
             newState = state.filter(snippet =>{
@@ -56,10 +59,19 @@ export const view = (state = {},action)=>{
             return state;
     }
 }
+export const user = (state = {},action)=>{
+    switch(action.type){ //TODO replace with user actions
+        case C.VIEW.SET_ACTIVE_SNIPPET :
+            return state = [...action.payload];
+        default:
+            return state;
+    }
+}
 
 
 export default combineReducers({
     snippets,
     keywords,
-    view
+    view,
+    user
 });

@@ -1,6 +1,7 @@
 import C from './constants'
 import fetch from 'isomorphic-fetch'
 import { SnippetService } from '../services/snippet.service'
+import { resolve } from 'path';
 let serverURL = C.VIEW.SERVER_URL;
 
 
@@ -59,6 +60,23 @@ export const updateSnippet = (snippet) => async (dispatch , getState) =>{
 
     }
 }
+export const saveSnippet = (snippet) => async (dispatch , getState) =>{
+
+    try{
+        let resultSnippet = await SnippetService.saveSnippet(snippet);
+        console.log(resultSnippet)
+        dispatch({
+            type: C.SNIPPETS.ADD_NEW,
+            payload: resultSnippet
+        });
+        console.log(resultSnippet)
+
+        return resultSnippet;
+    }catch(error){
+        return new Error(error)
+
+    }
+}
 export const searchSnippets = (SearchTerm) => async (dispatch , getState) =>{
 
     try{
@@ -73,6 +91,21 @@ export const searchSnippets = (SearchTerm) => async (dispatch , getState) =>{
 
     }
 }
+
+// export const login = () => async (dispatch , getState) =>{
+
+//     try{
+//         let user = await UserService.login(snippetId);
+//         dispatch({
+//             type: C.SNIPPETS.FTECH_BY_ID,
+//             payload: snippet
+//         });
+//     }catch(error){
+//         return new Error(error)
+
+//     }
+// }
+
 
 
 

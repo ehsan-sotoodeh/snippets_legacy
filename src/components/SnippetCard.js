@@ -14,9 +14,13 @@ const SnippetCard = ({snippet}) => {
     });
 
     return (
-
         <Card className="snippetCard col-12 ml-2 my-1" style={{ width: '90%' }}>
-            <NavLink snippet={snippet} exact to={`/snippet/${snippet.id}`}>
+            <NavLink snippet={snippet} exact to={
+                {
+                    pathname: "/snippet/" + snippet.id,
+                    snippet:{...snippet}
+                }
+                }>
                 <div className="row ">
                     <div className="col-md-1 bg-secondary">
                     </div>
