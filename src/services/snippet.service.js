@@ -1,14 +1,18 @@
 import C from '../store/constants'
 const axios = require('axios');
+require('dotenv').config()
 
 class SnippetService  {
     constructor(){
-        this.serverURL = C.VIEW.SERVER_URL;
+        console.log( process.env)
+        this.serverURL = process.env.REACT_APP_SERVER_ADDRESS;
     }
     
     async fetchAllSnippets() {
         try {
             const url = `${this.serverURL}/snippets`;
+            console.log(process.env.SERVER_ADDRESS);
+            console.log(url);
             let snippets = await fetch(url , {mode: 'cors'});
             snippets = snippets.json();
             return snippets;
@@ -19,7 +23,7 @@ class SnippetService  {
 
     async fetchOneSnippetById(snippetId) {
         try {
-            const url = `${this.serverURL}/snippet/${snippetId}`;
+            const url = `${this.serverURL}/snippets/id/${snippetId}`;
 
             let snippet = await axios.get(url);
             return snippet.data
@@ -29,9 +33,10 @@ class SnippetService  {
 
     }
     async updateSnippetById(inputSnippet) {
+        console.log(inputSnippet)
         try {
             let inputSnippetString = urlfy(inputSnippet);
-            const url = `${this.serverURL}/snippet/snippet?${inputSnippetString}`;
+            const url = `${this.serverURL}/snippets/id/${inputSnippet.id}?${inputSnippetString}`;
             let snippet = await axios.put(url)
             return snippet.data
         } catch (error) {
@@ -53,7 +58,8 @@ class SnippetService  {
     }
     async deleteSnippet(snippetId) {
         try {
-            const url = `${this.serverURL}/snippet/${snippetId}`;
+            const url = `${this.serverURL}/snippets/id/${snippetId}`;
+            console.log(url)
             let snippet = await axios.delete(url)
             return snippet.data
         } catch (error) {

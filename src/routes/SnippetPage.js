@@ -42,18 +42,9 @@ class SnippetPage extends Component {
             editableMoudules : ["title","keywords","content"] , 
             editedVersion : {"title":"","keywords":"","content":""}
         }
-        console.log(this.props.location)
-        //this.activeSnippet  = parseInt(this.props.match.params.snippetId);
-        // check if it's a new snippet. -1 for new snippet
-        // if(!this.activeSnippet === -1){
-        //     this.snippet = this.props.snippets.filter(snippet =>{
-        //         return snippet.id === this.activeSnippet;
-        //     })[0]; 
-        //     if(this.snippet === undefined){
-        //         this.props.fetchOneSnippetById(this.activeSnippet)
-        //     }
-        // }
-        //this.snippet = this.props.location.snippet;
+        this.snippet = {};
+
+
 
       }
 
@@ -84,7 +75,7 @@ class SnippetPage extends Component {
         }
         let editedVersion = this.state.editedVersion;
         let outputSnippet = {};
-        outputSnippet["id"] = this.activeSnippet
+        outputSnippet["id"] = this.snippet.id;
         outputSnippet["title"] = (editedVersion.title.length > 0) ? editedVersion.title : this.snippet.title;
         outputSnippet["keywords"] = (editedVersion.keywords.length > 0) ? editedVersion.keywords : this.snippet.keywords;
         outputSnippet["content"] = (editedVersion.content.length > 0) ? editedVersion.content : this.snippet.content;
@@ -118,7 +109,7 @@ class SnippetPage extends Component {
         this.setState({"editableMoudules":[], "editedVersion" :  {"title":"","keywords":"","content":""} })
     }
     deleteSnippet = () =>{
-        this.props.deleteSnippet(this.activeSnippet);
+        this.props.deleteSnippet(this.snippet.id);
         this.props.history.push("/");
 
     }
@@ -136,11 +127,14 @@ class SnippetPage extends Component {
 
     getSnippet = (snippetId) =>{
         //Get snippet from navlink;
+        console.log(snippetId)
         let snippet = this.props.location.snippet;
         if(snippet)
             return snippet;
 
         // Get snippet from Store;
+        console.log(this.props.snippets.length)
+        console.log(this.props.snippets)
         snippet = this.props.snippets.filter(snippet =>{
             return snippet.id === snippetId;
         })[0]; 
@@ -153,8 +147,8 @@ class SnippetPage extends Component {
 
     render() {
         const activeSnippet  = parseInt(this.props.match.params.snippetId);
+        console.log(activeSnippet)
         const isNewSnippet = (activeSnippet === -1)? true:false;
-        this.snippet = {};
 
         if(isNewSnippet){
             //its a new snippet
@@ -228,17 +222,7 @@ class SnippetPage extends Component {
                             <button className="editBtn btn btn-outline-success btn-sm showHideToggle" onClick={()=>{this.enableEdit('keywords')}}><FontAwesomeIcon icon={faPen} /></button>
 
                     </div>
-{/* 
-                    <div className="editableElement">
-                        <ContentModuleJsx 
-                            content={this.snippet.content} 
-                            isEditable={this.state.editableMoudules.includes('content')}
-                            editedContent = {this.state.editedVersion.content}
-                            handelEdit = {this.handelEdit}
-                            />
-                            <button className="btn btn-outline-success btn-sm showHideToggle" onClick={()=>{this.enableEdit('content')}}><FontAwesomeIcon icon={faPen} /></button>
 
-                    </div> */}
                     
 
                 </div>
@@ -309,18 +293,6 @@ function KeywordsModuleJsx({keywords,isEditable,handelEdit,editedKeywords}) {
         </h1>
     )
 }
-function ContentModuleJsx({content,isEditable,handelEdit,editedContent}) {
-    if(isEditable){
-        let contentValue = (editedContent.length > 0 )? editedContent : content;
-        return (
-            <textarea  type="text" name="content"  onChange={handelEdit}>{contentValue}</textarea>
-        )
-    }
-    return(
-        <p>
-            {content}
-        </p>
-    )
-}
+
 
 export default connect(mapStateToProps,mapDispatchToProps)(SnippetPage);

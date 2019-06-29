@@ -1,13 +1,11 @@
 import C from './constants'
 import {combineReducers} from 'redux'
 import initialState from './initialState.json'
+import { stat } from 'fs';
 
 
 export const snippets = (state = initialState,action)=>{
     let newState = []
-    console.log(state)
-    console.log(action.type)
-
     switch(action.type){
         case C.SNIPPETS.FETCH_ALL :
             return state = [...action.payload];
@@ -24,7 +22,7 @@ export const snippets = (state = initialState,action)=>{
         case C.SNIPPETS.UPDATE_ONE_BY_ID:
             newState = state.filter(snippet =>{
                 return snippet.id !== action.payload.id
-            })
+            });
             return [...newState,action.payload];
 
         case C.SNIPPETS.DELETE_ONE_BY_ID:

@@ -13,8 +13,7 @@ const constants = {
 
     },
     VIEW : {
-        SET_ACTIVE_SNIPPET : "SET_ACTIVE_SNIPPET",
-        SERVER_URL : "http://dev.sotoodeh.pro:3000"
+        SET_ACTIVE_SNIPPET : "SET_ACTIVE_SNIPPET"
     },
     USER : {
         USER_LOG_IN : "USER_LOG_IN",
