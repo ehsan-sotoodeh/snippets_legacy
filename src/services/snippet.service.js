@@ -1,19 +1,18 @@
 import C from '../store/constants'
 const axios = require('axios');
 require('dotenv').config()
+axios.defaults.withCredentials = true
+
 
 class SnippetService  {
     constructor(){
-        console.log( process.env)
         this.serverURL = process.env.REACT_APP_SERVER_ADDRESS;
     }
     
     async fetchAllSnippets() {
         try {
             const url = `${this.serverURL}/snippets`;
-            console.log(process.env.SERVER_ADDRESS);
-            console.log(url);
-            let snippets = await fetch(url , {mode: 'cors'});
+            let snippets = await fetch(url , {credentials: "include" , mode: 'cors'} );
             snippets = snippets.json();
             return snippets;
         } catch (error) {
@@ -37,7 +36,7 @@ class SnippetService  {
         try {
             let inputSnippetString = urlfy(inputSnippet);
             const url = `${this.serverURL}/snippets/id/${inputSnippet.id}?${inputSnippetString}`;
-            let snippet = await axios.put(url)
+            let snippet = await axios.put(url,{withCredentials: true})
             return snippet.data
         } catch (error) {
             console.log(error)
@@ -60,7 +59,7 @@ class SnippetService  {
         try {
             const url = `${this.serverURL}/snippets/id/${snippetId}`;
             console.log(url)
-            let snippet = await axios.delete(url)
+            let snippet = await axios.delete(url,{withCredentials: true})
             return snippet.data
         } catch (error) {
             console.log(error)

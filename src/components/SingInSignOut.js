@@ -1,16 +1,21 @@
 import React ,{ Component } from 'react'
+import { withRouter } from 'react-router-dom';
+import Cookies from 'universal-cookie';
 import Dropdown from 'react-bootstrap/Dropdown';
 import {connect } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome' 
-import { faKey } from '@fortawesome/free-solid-svg-icons'  
+import { faKey,faUser,faSignOutAlt } from '@fortawesome/free-solid-svg-icons'  
 import { faFacebook,faTwitter,faGooglePlus } from '@fortawesome/free-brands-svg-icons'  
 
+const cookies = new Cookies();
 
 const mapStateToProps = (state) =>{
     return {
         user : state.user
     }
 }
+
+
 
 const mapDispatchToProps = dispatch => {
     return{
@@ -26,33 +31,51 @@ const mapDispatchToProps = dispatch => {
     }
 }
 class  SingInSignOut extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            username: cookies.get('user_username'),
+            profilePhoto: cookies.get('user_profile_photo'),
+            token: cookies.get('auth_token')
+         }
+        this.handelLogin = this.handelLogin.bind(this);
+    }
+    
 
     handelLogin = (event)=>{
         let loginMethod = event.target.name;
+        console.log(this.history)
+        //this.props.history.push(":3000/");
+        let res = window.open("http://localhost:4000/auth/google", "_blank");
 
-        console.log(loginMethod);
+        //window.location.replace("http://localhost:4000/auth/google");
+        setInterval(()=>{
+            console.log(res.closed);
+            if(res.closed)
+                window.location.reload();
+
+        },1000)
+    }
+    handelLogout = ()=>{
+        window.location.replace("http://localhost:4000/auth/logout");
+
     }
 
     render(){
-        return(
-        <Dropdown>
-        <Dropdown.Toggle variant="success" id="dropdown-basic">
-        <FontAwesomeIcon icon={faKey} /> &nbsp;&nbsp;Login
-        </Dropdown.Toggle>
-    
-        <Dropdown.Menu className="loginDropDown p-0"  > 
-            <Dropdown.Item className="googleLogin my-1"   name="google" onClick={this.handelLogin}>
-                <FontAwesomeIcon icon={faGooglePlus}   /> &nbsp;&nbsp;  Google 
-            </Dropdown.Item>
-            <Dropdown.Item className="facebookLogin  my-1"   name="facebook" onClick={this.handelLogin}>
-                <FontAwesomeIcon icon={faFacebook}   /> &nbsp;&nbsp;  Facebook 
-            </Dropdown.Item>
-            <Dropdown.Item className="twitterLogin my-1" name="twitter" onClick={this.handelLogin}>
-                <FontAwesomeIcon icon={faTwitter}   /> &nbsp;&nbsp;  Twitter
-            </Dropdown.Item>
-        </Dropdown.Menu>
-        </Dropdown>
-        );
+        if(this.state.username){
+            return (
+                <ProfileComponent 
+                    profilePhoto={this.state.profilePhoto}
+                    username={this.state.username}
+                    handelLogout = {this.handelLogout}
+                 />
+            )
+        }else{
+            return(
+                <LoginComponent handelLogin={this.handelLogin} />
+            )
+        }
+
     }
 
 
@@ -62,6 +85,55 @@ class  SingInSignOut extends Component {
 
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(SingInSignOut);
+function ProfileComponent({profilePhoto,username,handelLogout}){
+    return (
+        <Dropdown alignRight>
+            <Dropdown.Toggle variant="success" id="dropdown-basic">
+                <FontAwesomeIcon icon={faUser} /> 
+            </Dropdown.Toggle>
+    
+            <Dropdown.Menu className="loginDropDown p-0"  > 
+                <Dropdown.Item className=""   >
+                <div className="" onFocus={()=>{alert()}}>
+                    <div className="profile-container col-md-12 col-sm-12 text-center">
+                            <img src={profilePhoto} alt="" className="header-avatar" />
+                            <div className="header-fullname font-weight-bold">{username}</div>              
+                    </div>
+                </div>            
+
+                </Dropdown.Item>
+
+                <Dropdown.Item className="bg-info text-light d-flex justify-content-center align-items-center" onClick={handelLogout} >
+                    <FontAwesomeIcon icon={faSignOutAlt}   /> &nbsp;&nbsp;  Sing out 
+                </Dropdown.Item>
+
+            </Dropdown.Menu>
+        </Dropdown>
+    )
+}
+
+function LoginComponent({handelLogin}){
+    return(
+        <Dropdown>
+        <Dropdown.Toggle variant="success" id="dropdown-basic">
+        <FontAwesomeIcon icon={faKey} /> 
+        </Dropdown.Toggle>
+    
+        <Dropdown.Menu className="loginDropDown p-0"  > 
+            <Dropdown.Item className="googleLogin my-1"   name="google" onClick={handelLogin.bind(this)}>
+                <FontAwesomeIcon icon={faGooglePlus}   /> &nbsp;&nbsp;  Google 
+            </Dropdown.Item>
+            <Dropdown.Item className="facebookLogin  my-1"   name="facebook" onClick={handelLogin}>
+                <FontAwesomeIcon icon={faFacebook}   /> &nbsp;&nbsp;  Facebook 
+            </Dropdown.Item>
+            <Dropdown.Item className="twitterLogin my-1" name="twitter" onClick={handelLogin}>
+                <FontAwesomeIcon icon={faTwitter}   /> &nbsp;&nbsp;  Twitter
+            </Dropdown.Item>
+        </Dropdown.Menu>
+        </Dropdown>
+    )
+}
+
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(SingInSignOut));
 
 
