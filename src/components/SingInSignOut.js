@@ -88,7 +88,7 @@ class  SingInSignOut extends Component {
 function ProfileComponent({profilePhoto,username,handelLogout}){
     return (
         <Dropdown alignRight>
-            <Dropdown.Toggle variant="success" id="dropdown-basic">
+            <Dropdown.Toggle size="sm" variant="outline-secondary " id="dropdown-basic">
                 <FontAwesomeIcon icon={faUser} /> 
             </Dropdown.Toggle>
     

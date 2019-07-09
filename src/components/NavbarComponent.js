@@ -8,44 +8,44 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch,faPlus } from '@fortawesome/free-solid-svg-icons'; 
 import { NavLink } from "react-router-dom";
 import SingInSignOut from './SingInSignOut'
+import Navbar from 'react-bootstrap/Navbar'
+import Nav from 'react-bootstrap/Nav'
+import FormControl from 'react-bootstrap/FormControl'
+import NavDropdown from 'react-bootstrap/NavDropdown'
 
 const NavbarComponent = ({handleSubmit,handleSearchInput,doSearch}) => {
 
     return (
-<nav class="navbar navbar-expand-md navbar-light bg-light">
-  <a class="navbar-brand" href="#">Navbar</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item dropdown d-none">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-    </ul>
-    <div id="custom-search-input">
-                <div class="input-group ">
-                    <input type="text" class="form-control input-sm" placeholder="Search..." />
-                    <span class="input-group-btn">
-                        <button class="btn btn-info btn-sm rounded-0" type="button">
-                        <FontAwesomeIcon icon={faSearch} />
-                        </button>
-                    </span>
+        <Navbar bg="light" expand="lg">
+        <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="mr-auto">
+            <NavDropdown className="d-none" title="Dropdown" id="basic-nav-dropdown">
+                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+            </NavDropdown>
+            </Nav>
+            
+            <Form inline>
+                <div id="custom-search-input" className="mr-3">
+                    <div class="input-group ">
+                            <input type="text" class="form-control input-sm" onChange={handleSearchInput} placeholder="Search..." />
+                            <span class="input-group-btn">
+                                <button class="btn btn-info btn-sm rounded-0" onClick={doSearch} type="button">
+                                    <FontAwesomeIcon icon={faSearch} />
+                                </button>
+                            </span>
+                    </div>
                 </div>
-            </div>
-  </div>
-</nav>
+            </Form>
+            <SingInSignOut className="col-sm-12"/>
 
-
+        </Navbar.Collapse>
+        </Navbar>
     )
 }
 
