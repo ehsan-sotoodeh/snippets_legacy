@@ -3,8 +3,6 @@ import {connect } from 'react-redux'
 import {fetchAllSnippets , searchSnippets} from '../store/actions'
 import SnippetCard from '../components/SnippetCard'
 import SingInSignOut from '../components/SingInSignOut'
-import NavbarComponent from '../components/NavbarComponent'
-import SidebarComponent from '../components/SidebarComponent'
 import InputGroup from 'react-bootstrap/InputGroup';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
@@ -71,24 +69,61 @@ class HomePage extends Component {
             )
         })
         return (
-            <div className="row m-0">
-                <div className="col-1 p-0">
-                    <SidebarComponent />
-                </div>
-                <div className="col-11 p-0">
-                    <NavbarComponent 
-                    handleSubmit={this.handleSubmit} 
-                    handleSearchInput={this.handleSearchInput} 
-                    doSearch={this.doSearch}/>
-
-                        {snippetsJsx}
-
+            <div>
+                <Row className={"my-2 p-0  border-secondary border-bottom justify-content-start"}>
+                    <Col  md={2}>
+                        <NavLink variant={'success'}  exact to={`/snippet/-1`} >
+                            <FontAwesomeIcon icon={faPlus} /> Add New...
+                        </NavLink>
+                    </Col>
+                    <Col  md={6}>
+                    <SearchJsx 
+                            
+                            handleSubmit={this.handleSubmit} 
+                            handleSearchInput={this.handleSearchInput} 
+                            doSearch={this.doSearch} />
+                    </Col>
+                    <Col md={2}>
+                        <SingInSignOut />
+                    </Col>
+                </Row>
+                <div className="row mx-3">
+                    {snippetsJsx}
                 </div>
             </div>
         )
     }
 }
 
+function SearchJsx({handleSubmit,handleSearchInput,doSearch}){
+    return (
+        <Form
+        className={'w-100 d-flex justify-content-start'}
+            noValidate
+            onSubmit={handleSubmit}
+        >
 
+
+            <Form.Group as={Col} controlId="validationCustomUsername">
+                <InputGroup>
+
+                <Form.Control
+                    type="text"
+                    placeholder="Search"
+                    aria-describedby="inputGroupPrepend"
+                    required
+                    onChange={handleSearchInput}
+                />
+                <InputGroup.Append>
+                        <Button type="submit" onClick={doSearch}>
+                            <FontAwesomeIcon icon={faSearch} />
+                        </Button>
+                </InputGroup.Append>
+
+                </InputGroup>
+            </Form.Group>
+        </Form>
+    )
+}
 
 export default connect(mapStateToProps,mapDispatchToProps)(HomePage);
