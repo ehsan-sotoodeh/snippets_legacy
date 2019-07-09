@@ -131,6 +131,16 @@ padding-bottom: 35px;
 
 
 
+.fontSize20{
+  font-size: 2rem  !important;
+}
+.fontSize17{
+  font-size: 1.7rem  !important;
+}
+.fontSize15{
+  font-size: 1.5rem  !important;
+}
+
 .fontSize13{
   font-size: 1.3rem  !important;
 }
@@ -166,6 +176,8 @@ padding-bottom: 35px;
 }
 
 
+/* Searchbar */
+
 #custom-search-input{
   border: solid 1px #E4E4E4;
   border-radius: 6px;
@@ -197,6 +209,25 @@ padding-bottom: 35px;
   font-size: 23px;
 }
 
+/* sidebar */
+.sidebarMenuItem{
+  color:#fff;
+  margin: 15px auto;
+  font-size: 1.5rem
+}
+
+.sidebar ul{
+  position: fixed;
+  top:50px;
+  left:0px;
+  padding-left: 10px;
+}
+.sidebar ul li{ 
+  margin-top:30px;
+}
+.sidebar .NavIcon{
+  margin: 0px auto;
+}
 
 
 .RichEditor-root {
