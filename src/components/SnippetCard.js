@@ -5,7 +5,7 @@ import { faBookmark,faShareAlt } from '@fortawesome/free-solid-svg-icons';
 
 
 const SnippetCard = ({snippet}) => {
-
+    console.log(snippet)
     let keywordsJsx = snippet.keywords.split(" ").map((keyword,index) =>{
         return(
             <span key={"badge-pill" + index} className="fontSize07 mx-1 padding05 badge badge-pill badge-success">{keyword}</span>
@@ -35,7 +35,6 @@ const SnippetCard = ({snippet}) => {
                                     <FontAwesomeIcon className="fontSize12 mx-2" icon={faBookmark} />
                                     <FontAwesomeIcon className="fontSize12 mx-2" icon={faShareAlt} />
                                 </div>
-
                             </div>
                         </div>
                     </div>

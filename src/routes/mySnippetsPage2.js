@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {connect } from 'react-redux'
-import {fetchAllSnippets , searchSnippets} from '../store/actions'
+import {fetchMySnippets , searchSnippets} from '../store/actions'
 import SnippetCard from '../components/SnippetCard'
 import SingInSignOut from '../components/SingInSignOut'
 import InputGroup from 'react-bootstrap/InputGroup';
@@ -22,8 +22,8 @@ const mapStateToProps = (state) =>{
 
 const mapDispatchToProps = dispatch => {
     return{
-        fetchAllSnippets(){
-            dispatch(fetchAllSnippets())
+        fetchMySnippets(){
+            dispatch(fetchMySnippets())
         },
         searchSnippets(term){
             dispatch(searchSnippets(term))
@@ -34,7 +34,7 @@ const mapDispatchToProps = dispatch => {
 
 
 
-class HomePage extends Component {
+class mySnippetsPage extends Component {
     delayTimer;
     constructor(props){
         super(props);
@@ -43,7 +43,7 @@ class HomePage extends Component {
     }
 
     componentDidMount(){
-        this.props.fetchAllSnippets();
+        this.props.fetchMySnippets();
     }
 
 
@@ -63,6 +63,7 @@ class HomePage extends Component {
     }
 
     render() {
+
         let snippetsJsx = this.props.snippets.map((snippet,index) =>{
             return(
                 <SnippetCard key={"snippetCard" + index} snippet={snippet} />
@@ -126,4 +127,4 @@ function SearchJsx({handleSubmit,handleSearchInput,doSearch}){
     )
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(HomePage);
+export default connect(mapStateToProps,mapDispatchToProps)(mySnippetsPage);

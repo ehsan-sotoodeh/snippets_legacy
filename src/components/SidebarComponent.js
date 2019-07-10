@@ -9,12 +9,12 @@ import { faHome,faPlus,faGlobe,faPenNib,faTh,faBookmark } from '@fortawesome/fre
 import { NavLink } from "react-router-dom";
 
 const SidebarComponent = () => {
-
+    console.log("SidebarComponent")
     return (
         <div className="sidebar h-100 px-0">
             <ul className="noBullet text-light">
                 <li>
-                    <NavLink className="sidebarMenuItem d-flex flex-column"  exact to={`/snippet/-1`} >
+                    <NavLink className="sidebarMenuItem d-flex flex-column"  exact to={`/`} >
                         <FontAwesomeIcon className="NavIcon" icon={faHome} />
                         <span className="fontSize07 " >Home</span>
                     </NavLink>
@@ -26,19 +26,14 @@ const SidebarComponent = () => {
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink className="sidebarMenuItem d-flex flex-column justify-content-center "  exact to={`/snippet/-1`} >
+                    <NavLink className="sidebarMenuItem d-flex flex-column justify-content-center "  exact to={`/mySnippets`} >
                         <FontAwesomeIcon className="NavIcon" icon={faBookmark} />
                         <span className="fontSize07 " >My Snippets</span>
                     </NavLink>
                 </li>
+
                 <li>
-                    <NavLink className="sidebarMenuItem d-flex flex-column justify-content-center"  exact to={`/snippet/-1`} >
-                        <FontAwesomeIcon className="NavIcon" icon={faGlobe} />
-                        <span className="fontSize07 " >Discover</span>
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink className="sidebarMenuItem d-flex flex-column"  exact to={`/snippet/-1`} >
+                    <NavLink className="sidebarMenuItem d-flex flex-column"  exact to={`/collections`} >
                         <FontAwesomeIcon className="NavIcon" icon={faTh} />
                         <span className="fontSize07" >Collection</span>
                     </NavLink>

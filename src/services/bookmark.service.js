@@ -4,7 +4,7 @@ require('dotenv').config()
 axios.defaults.withCredentials = true
 
 
-class SnippetService  {
+class BookmarkService  {
     constructor(){
         this.serverURL = process.env.REACT_APP_SERVER_ADDRESS;
     }
@@ -12,16 +12,6 @@ class SnippetService  {
     async fetchAllSnippets() {
         try {
             const url = `${this.serverURL}/snippets`;
-            let snippets = await fetch(url , {credentials: "include" , mode: 'cors'} );
-            snippets = snippets.json();
-            return snippets;
-        } catch (error) {
-            throw new Error(error.message)
-        }
-    }
-    async fetchMySnippets() {
-        try {
-            const url = `${this.serverURL}/snippets/mySnippets`;
             let snippets = await fetch(url , {credentials: "include" , mode: 'cors'} );
             snippets = snippets.json();
             return snippets;
@@ -103,5 +93,5 @@ String.prototype.replaceAll = function(search, replacement) {
     return target.split(search).join(replacement);
 };
 
-const _SnippetService = new SnippetService();
-export { _SnippetService as SnippetService };
+const _BookmarkService = new BookmarkService();
+export { _BookmarkService as BookmarkService };

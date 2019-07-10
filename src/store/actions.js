@@ -19,6 +19,20 @@ export const fetchAllSnippets = () => async (dispatch , getState) =>{
 
     }
 }
+export const fetchMySnippets = () => async (dispatch , getState) =>{
+
+    try{
+        let snippets = await SnippetService.fetchMySnippets();
+        dispatch({
+            type: C.SNIPPETS.FETCH_ALL,
+            payload: snippets
+        });
+    }catch(error){
+        console.log(error)
+        return new Error(error)
+
+    }
+}
 export const fetchOneSnippetById = (snippetId) => async (dispatch , getState) =>{
 
     try{
