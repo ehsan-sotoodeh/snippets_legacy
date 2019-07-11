@@ -9,7 +9,6 @@ import { faHome,faPlus,faGlobe,faPenNib,faTh,faBookmark } from '@fortawesome/fre
 import { NavLink } from "react-router-dom";
 
 const SidebarComponent = () => {
-    console.log("SidebarComponent")
     return (
         <div className="sidebar h-100 px-0">
             <ul className="noBullet text-light">

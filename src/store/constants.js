@@ -18,6 +18,9 @@ const constants = {
     USER : {
         USER_LOG_IN : "USER_LOG_IN",
         USER_LOG_OUT : "USER_LOG_OUT"
+    },
+    COLLECTION : {
+        FETCH_COLLECTION : "FETCH_COLLECTION"
     }
 
 }

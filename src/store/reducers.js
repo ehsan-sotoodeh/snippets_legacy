@@ -20,10 +20,11 @@ export const snippets = (state = initialState,action)=>{
             return state = [...state,action.payload];
 
         case C.SNIPPETS.UPDATE_ONE_BY_ID:
-            newState = state.filter(snippet =>{
-                return snippet.id !== action.payload.id
-            });
-            return [...newState,action.payload];
+            //TO keep the order of snippets unchanged
+            const currentIndex = state.findIndex(snippet =>  snippet.id === action.payload.id);
+            const arrayFirstPart = state.slice(0,currentIndex);
+            const arrayLastPart = state.slice(currentIndex+1,state.length);
+            return [...arrayFirstPart,action.payload,...arrayLastPart];
 
         case C.SNIPPETS.DELETE_ONE_BY_ID:
             let deletedId = parseInt(action.payload);
@@ -65,11 +66,21 @@ export const user = (state = {},action)=>{
             return state;
     }
 }
+export const collection = (state = {},action)=>{
+    switch(action.type){ //TODO replace with user actions
+        case C.COLLECTION.FETCH_COLLECTION :
+
+            return action.payload;
+        default:
+            return state;
+    }
+}
 
 
 export default combineReducers({
     snippets,
     keywords,
     view,
-    user
+    user,
+    collection
 });

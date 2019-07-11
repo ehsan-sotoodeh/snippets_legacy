@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {connect } from 'react-redux'
-import {fetchAllSnippets , searchSnippets} from '../store/actions'
+import {fetchCollection} from '../store/actions'
 import SnippetCard from '../components/SnippetCard'
 import SingInSignOut from '../components/SingInSignOut'
 import NavbarComponent from '../components/NavbarComponent'
@@ -18,18 +18,14 @@ const SEARCHBOX_DELAY = 500; // add to settings file
 
 const mapStateToProps = (state) =>{
     return {
-        snippets : state.snippets
+        collection : state.collection
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return{
-        fetchAllSnippets(){
-            dispatch(fetchAllSnippets())
-        },
-        searchSnippets(term){
-            dispatch(searchSnippets(term))
-
+        fetchCollection(){
+            dispatch(fetchCollection())
         }
     }
 }
@@ -38,16 +34,15 @@ const mapDispatchToProps = dispatch => {
 
 class collectionsPage extends Component {
     delayTimer;
+
     constructor(props){
         super(props);
-        this.state = {"searchKey" : ""}
 
     }
 
     componentDidMount(){
-        this.props.fetchAllSnippets();
+        this.props.fetchCollection();
     }
-
 
     handleSubmit =  (e) => {
         e.preventDefault();
@@ -64,17 +59,27 @@ class collectionsPage extends Component {
         this.props.searchSnippets(this.state.searchKey.trim());
     }
 
+
+
+
     render() {
-        return(
-            <h1>collectionsPage</h1>
-        )
-        let snippetsJsx = this.props.snippets.map((snippet,index) =>{
+        if(Object.keys(this.props.collection).length === 0 ){
             return(
-                <SnippetCard key={"snippetCard" + index} snippet={snippet} />
+                <h3>Loading...</h3>
+            )
+        }
+        console.log((this.props.collection)) 
+        const collectionArray = objectToArray(this.props.collection)
+        console.log(collectionArray) 
+
+        let keywordsJSX = collectionArray.map(keyword =>{
+            console.log(keyword)
+            return(
+                <span className="badge badge-pill badge-primary" >{keyword[0]} x {keyword[1]}</span>
             )
         })
         return (
-            <div className="row m-0">
+            <div className="row m-0 h-100">
                 <div className="col-1 p-0">
                     <SidebarComponent />
                 </div>
@@ -84,7 +89,7 @@ class collectionsPage extends Component {
                     handleSearchInput={this.handleSearchInput} 
                     doSearch={this.doSearch}/>
 
-                        {snippetsJsx}
+                        {keywordsJSX}
 
                 </div>
             </div>
@@ -92,6 +97,11 @@ class collectionsPage extends Component {
     }
 }
 
-
+function objectToArray(inputObject){
+    var resultArray = Object.keys(inputObject).map(function(key) {
+        return [key, inputObject[key]];
+      });
+    return resultArray
+}
 
 export default connect(mapStateToProps,mapDispatchToProps)(collectionsPage);

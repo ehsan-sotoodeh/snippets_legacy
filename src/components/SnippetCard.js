@@ -52,7 +52,6 @@ class SnippetCard extends Component{
 
     render(){
         const snippet = this.props.snippet;
-        console.log(snippet)
         let keywordsJsx = snippet.keywords.split(" ").map((keyword,index) =>{
             return(
                 <span key={"badge-pill" + index} className="fontSize07 mx-1 padding05 badge badge-pill badge-success">{keyword}</span>

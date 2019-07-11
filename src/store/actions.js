@@ -2,6 +2,7 @@ import C from './constants'
 import fetch from 'isomorphic-fetch'
 import { SnippetService } from '../services/snippet.service'
 import { BookmarkService } from '../services/bookmark.service'
+import { CollectionService } from '../services/collection.service'
 import { resolve } from 'path';
 let serverURL = C.VIEW.SERVER_URL;
 
@@ -124,18 +125,34 @@ export const bookmarkSnippet = (snippetId) => async (dispatch , getState) =>{
 
     }
 }
+
 export const unBookmarkSnippet = (snippetId) => async (dispatch , getState) =>{
-    console.log("bookmarkSnippet")
     try{
         let resultSnippet = await BookmarkService.unBookmarkSnippet(snippetId);
-        console.log(resultSnippet)
         dispatch({
             type: C.SNIPPETS.UPDATE_ONE_BY_ID,
             payload: resultSnippet
         });
-        console.log(resultSnippet)
-
+        
         return resultSnippet;
+    }catch(error){
+        return new Error(error)
+
+    }
+}
+
+
+export const fetchCollection = (snippetId) => async (dispatch , getState) =>{
+    try{
+        let collection = await CollectionService.fetchCollection(snippetId);
+        console.log(collection) 
+
+        dispatch({
+            type: C.COLLECTION.FETCH_COLLECTION,
+            payload: collection
+        });
+        
+        return collection;
     }catch(error){
         return new Error(error)
 
