@@ -14,12 +14,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch,faPlus } from '@fortawesome/free-solid-svg-icons'; 
 import { NavLink } from "react-router-dom";
 import queryString from 'query-string';
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
 
 const SEARCHBOX_DELAY = 500; // add to settings file
 
 const mapStateToProps = (state) =>{
     return {
-        snippets : state.snippets
+        snippets : state.snippets,
+        userId : parseInt(cookies.get("user_id"))
     }
 }
 
@@ -75,11 +78,10 @@ class HomePage extends Component {
     doSearch = () =>{
         this.props.searchSnippets(this.state.searchKey.trim());
     }
-
     render() {
         let snippetsJsx = this.props.snippets.map((snippet,index) =>{
             return(
-                <SnippetCard key={"snippetCard" + index} snippet={snippet} />
+                <SnippetCard key={"snippetCard" + index} snippet={snippet} userId={this.props.userId} />
             )
         })
         return (

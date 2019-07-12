@@ -3,8 +3,7 @@ import {connect } from 'react-redux'
 import {fetchMySnippets , searchSnippets ,bookmarkSnippet ,unBookmarkSnippet} from '../store/actions'
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBookmark,faShareAlt } from '@fortawesome/free-solid-svg-icons'; 
-
+import { faBookmark,faShareAlt,faUserEdit } from '@fortawesome/free-solid-svg-icons'; 
 
 const mapStateToProps = (state) =>{
     return {
@@ -58,6 +57,9 @@ class SnippetCard extends Component{
     
             )
         });
+        const isCreatedByLoggedInUser = (this.props.userId === snippet.user)?true:false;
+
+    
         const bookmarkedClass = (snippet.bookmarkId)? "text-primary" : "text-secondary";
         return (
             <div className="card snippetCard  col-12 ml-2 my-3 " style={{ width: '90%' }}>
@@ -81,10 +83,13 @@ class SnippetCard extends Component{
                                 </div>
                                     <div className="d-flex justify-content-end m-0">
                                         <FontAwesomeIcon 
-                                            onClick={this.bookmarkToggle}
-                                            className={"fontSize12 mx-2 "+ bookmarkedClass} 
-                                            icon={faBookmark} />
-                                        <FontAwesomeIcon className="fontSize12 mx-2" icon={faShareAlt} />
+                                            className={"fontSize11 mx-2 text-secondary " + ((isCreatedByLoggedInUser)?" ":"d-none")}
+                                             icon={faUserEdit} />
+                                            <FontAwesomeIcon 
+                                                onClick={this.bookmarkToggle}
+                                                className={"fontSize11 mx-2 pointer "+ bookmarkedClass} 
+                                                icon={faBookmark} />
+                                        {/* <FontAwesomeIcon className="fontSize11 mx-2 text-secondary " icon={faShareAlt} /> */}
                                     </div>
                                 </div>
                             </div>

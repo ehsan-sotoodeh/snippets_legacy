@@ -247,6 +247,9 @@ padding-bottom: 35px;
   border-width: 2px;
 
 }
+.pointer{
+  cursor: pointer;
+}
 
 .RichEditor-root {
     background: #fff;
