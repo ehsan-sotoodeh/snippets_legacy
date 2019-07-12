@@ -76,11 +76,11 @@ class collectionsPage extends Component {
 
         let keywordsJSX = collectionArray.map(keyword =>{
             return(
-                <span className="keywordPill btn btn-outline-info  px-2 py-1 m-2 float-left" >
+                <NavLink to={ "/?search=" + keyword[0]} className="keywordPill btn btn-outline-info  px-2 py-1 m-2 float-left" >
                     <span className=" fontSize10 font-weight-bold pr-3">{keyword[0]}</span>
                     <span className="fontSize07 badge badge-secondary">{keyword[1]}</span>
                     
-                </span>
+                </NavLink>
             )
         })
         return (

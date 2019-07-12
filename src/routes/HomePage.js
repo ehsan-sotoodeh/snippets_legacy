@@ -13,6 +13,7 @@ import Row from 'react-bootstrap/Row';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch,faPlus } from '@fortawesome/free-solid-svg-icons'; 
 import { NavLink } from "react-router-dom";
+import queryString from 'query-string';
 
 const SEARCHBOX_DELAY = 500; // add to settings file
 
@@ -40,12 +41,23 @@ class HomePage extends Component {
     delayTimer;
     constructor(props){
         super(props);
-        this.state = {"searchKey" : ""}
+        let params = queryString.parse(this.props.location.search);
+        if(params.search){
+            this.state = {"searchKey":params.search};
+            this.doSearch();
+        }else{
+            this.state = {"searchKey" : ""}
+        }
 
     }
 
     componentDidMount(){
-        this.props.fetchAllSnippets();
+
+        let params = queryString.parse(this.props.location.search);
+        if(!params.search){
+            // we have handled search in constructor before.
+            this.props.fetchAllSnippets();
+        }      
     }
 
 
@@ -71,12 +83,13 @@ class HomePage extends Component {
             )
         })
         return (
-            <div className="row m-0">
+            <div className="fullHeightPage row m-0">
                 <div className="col-1 p-0">
                     <SidebarComponent />
                 </div>
                 <div className="col-11 p-0">
                     <NavbarComponent 
+                    searchKey={this.state.searchKey} 
                     handleSubmit={this.handleSubmit} 
                     handleSearchInput={this.handleSearchInput} 
                     doSearch={this.doSearch}/>

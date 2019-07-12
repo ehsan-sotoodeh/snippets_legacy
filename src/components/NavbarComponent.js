@@ -13,7 +13,7 @@ import Nav from 'react-bootstrap/Nav'
 import FormControl from 'react-bootstrap/FormControl'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 
-const NavbarComponent = ({handleSubmit,handleSearchInput,doSearch}) => {
+const NavbarComponent = ({handleSubmit,handleSearchInput,doSearch,searchKey}) => {
 
     return (
         <Navbar bg="light" expand="lg">
@@ -33,7 +33,7 @@ const NavbarComponent = ({handleSubmit,handleSearchInput,doSearch}) => {
             <Form inline>
                 <div id="custom-search-input" className="mr-3">
                     <div class="input-group ">
-                            <input type="text" class="form-control input-sm" onChange={handleSearchInput} placeholder="Search..." />
+                            <input type="text" class="form-control input-sm" onChange={handleSearchInput} value={searchKey} placeholder="Search..." />
                             <span class="input-group-btn">
                                 <button class="btn btn-info btn-sm rounded-0" onClick={doSearch} type="button">
                                     <FontAwesomeIcon icon={faSearch} />
