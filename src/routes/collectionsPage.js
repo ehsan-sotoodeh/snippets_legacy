@@ -68,18 +68,23 @@ class collectionsPage extends Component {
                 <h3>Loading...</h3>
             )
         }
-        console.log((this.props.collection)) 
-        const collectionArray = objectToArray(this.props.collection)
-        console.log(collectionArray) 
+        const collectionArray = objectToArray(this.props.collection);
+        console.log(collectionArray)
+        collectionArray.sort(function(a, b) {
+            return b[1] - a[1];
+        });
 
         let keywordsJSX = collectionArray.map(keyword =>{
-            console.log(keyword)
             return(
-                <span className="badge badge-pill badge-primary" >{keyword[0]} x {keyword[1]}</span>
+                <span className="keywordPill btn btn-outline-info  px-2 py-1 m-2 float-left" >
+                    <span className=" fontSize10 font-weight-bold pr-3">{keyword[0]}</span>
+                    <span className="fontSize07 badge badge-secondary">{keyword[1]}</span>
+                    
+                </span>
             )
         })
         return (
-            <div className="row m-0 h-100">
+            <div className="fullHeightPage row m-0">
                 <div className="col-1 p-0">
                     <SidebarComponent />
                 </div>
@@ -88,9 +93,9 @@ class collectionsPage extends Component {
                     handleSubmit={this.handleSubmit} 
                     handleSearchInput={this.handleSearchInput} 
                     doSearch={this.doSearch}/>
-
+                    <div className="">
                         {keywordsJSX}
-
+                    </div>
                 </div>
             </div>
         )

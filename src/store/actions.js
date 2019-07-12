@@ -145,8 +145,6 @@ export const unBookmarkSnippet = (snippetId) => async (dispatch , getState) =>{
 export const fetchCollection = (snippetId) => async (dispatch , getState) =>{
     try{
         let collection = await CollectionService.fetchCollection(snippetId);
-        console.log(collection) 
-
         dispatch({
             type: C.COLLECTION.FETCH_COLLECTION,
             payload: collection

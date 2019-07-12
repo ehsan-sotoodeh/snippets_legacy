@@ -175,6 +175,9 @@ padding-bottom: 35px;
   background-color: #35033b
 }
 
+.fullHeightPage{
+  height: 100vh
+}
 
 /* Searchbar */
 
@@ -234,6 +237,14 @@ padding-bottom: 35px;
 
 .snippetCard{
   border-left: 6px solid rgb(255, 123, 0) !important; 
+
+}
+
+
+/* collection page */
+.keywordPill{
+  line-height: 1;
+  border-width: 2px;
 
 }
 

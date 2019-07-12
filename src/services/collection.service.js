@@ -14,7 +14,6 @@ class CollectionService  {
             const url = `${this.serverURL}/collection`;
             let response = await axios.get(url,{withCredentials: true});
 
-            console.log(response)
             if(response.data.result){//collection fetched successfully
                 return response.data.payload;
             }else{
