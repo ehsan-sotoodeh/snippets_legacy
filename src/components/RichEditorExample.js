@@ -11,8 +11,6 @@ class RichEditorExample extends React.Component {
     // if content is empty at an empty tag to content to avoid bug in RichEditor
     this.content = (this.props.content.length > 0 )? this.props.content : "<br/>";
 
-
-    console.log(this.props.content)
     this.state = {editorState: EditorState.createWithContent(
       ContentState.createFromBlockArray(
         convertFromHTML(this.content)

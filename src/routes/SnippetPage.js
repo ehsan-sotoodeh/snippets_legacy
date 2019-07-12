@@ -19,7 +19,6 @@ const mapDispatchToProps = dispatch => {
     return{
         fetchOneSnippetById(activeSnippet){
             return dispatch(fetchOneSnippetById(activeSnippet)).then(res=>{
-                console.log(res)
             });
         },
         deleteSnippet(activeSnippet){
@@ -42,15 +41,13 @@ class SnippetPage extends Component {
         this.activeSnippet  = parseInt(this.props.match.params.snippetId);
         this.isNewSnippet = (this.activeSnippet === -1)? true:false;
 
-        const editableMoudules = (this.isNewSnippet)? ["title","keywords","content"]:[];
+        const editableModules = (this.isNewSnippet)? ["title","keywords","content"]:[];
         this.state = {
             errorMessage : "",
-            editableMoudules : [...editableMoudules] , 
+            editableModules : [...editableModules] , 
             editedVersion : {"title":"","keywords":"","content":""}
         }
         this.snippet = {};
-
-
 
       }
 
@@ -62,8 +59,8 @@ class SnippetPage extends Component {
 
 
     enableEdit = (inputModule) =>{
-        let editedModules = [...this.state.editableMoudules,inputModule]
-        this.setState({editableMoudules :editedModules});
+        let editedModules = [...this.state.editableModules,inputModule]
+        this.setState({editableModules :editedModules});
     }
     handelEdit = (event) =>{
 
@@ -87,7 +84,7 @@ class SnippetPage extends Component {
         outputSnippet["content"] = (editedVersion.content.length > 0) ? editedVersion.content : this.snippet.content;
         //if id title keywords are empty show proper message
         this.props.updateSnippet(outputSnippet);
-        this.setState({"editableMoudules":[], "editedVersion" :  {"title":"","keywords":"","content":""} })
+        this.setState({"editableModules":[], "editedVersion" :  {"title":"","keywords":"","content":""} })
 
     }
     saveSnippet = () =>{
@@ -102,17 +99,19 @@ class SnippetPage extends Component {
         outputSnippet["keywords"] = (editedVersion.keywords.length > 0) ? editedVersion.keywords : this.snippet.keywords;
         outputSnippet["content"] = (editedVersion.content.length > 0) ? editedVersion.content : this.snippet.content;
         //if id title keywords are empty show proper message
+        this.setState({"editableModules":[], "editedVersion" :  {"title":"","keywords":"","content":""} })
         let result = this.props.saveSnippet(outputSnippet);
         result.then(snippet=>{
-            this.props.snippets.push(snippet)
+            this.activeSnippet  = snippet.id;
+            this.isNewSnippet = (this.activeSnippet === -1)? true:false;
+            this.snippet.id = snippet.id;
             this.props.history.push(`/snippet/${snippet.id}`);
 
         });
-        this.setState({"editableMoudules":[], "editedVersion" :  {"title":"","keywords":"","content":""} })
 
     }
     refreshSnippet = () =>{
-        this.setState({"editableMoudules":[], "editedVersion" :  {"title":"","keywords":"","content":""} })
+        this.setState({"editableModules":[], "editedVersion" :  {"title":"","keywords":"","content":""} })
     }
     deleteSnippet = () =>{
         this.props.deleteSnippet(this.snippet.id);
@@ -133,14 +132,11 @@ class SnippetPage extends Component {
 
     getSnippet = (snippetId) =>{
         //Get snippet from navlink;
-        console.log(snippetId)
         let snippet = this.props.location.snippet;
         if(snippet)
             return snippet;
 
         // Get snippet from Store;
-        console.log(this.props.snippets.length)
-        console.log(this.props.snippets)
         snippet = this.props.snippets.filter(snippet =>{
             return snippet.id === snippetId;
         })[0]; 
@@ -160,7 +156,8 @@ class SnippetPage extends Component {
             this.snippet.title = ""
             this.snippet.keywords = ""
             this.snippet.content = ""
-            this.snippet.user = this.props.userId
+            this.snippet.user = this.props.userId;
+            
 
         }else{
             this.snippet = this.getSnippet(this.activeSnippet)
@@ -174,8 +171,6 @@ class SnippetPage extends Component {
         let isUpdateButtonActive = this.checkIfUpdateButtonIsActive();
 
         const isModifiable = (this.props.userId === this.snippet.user)?true:false;
-        console.log(this.props.userId , this.snippet.user)
-        console.log(isModifiable)
 
         return (
             <div className="snippetPage">
@@ -206,7 +201,7 @@ class SnippetPage extends Component {
                     <div className="editableElement position-relative">
                         <TitleModuleJsx 
                             title={this.snippet.title} 
-                            isEditable={this.state.editableMoudules.includes('title')}
+                            isEditable={this.state.editableModules.includes('title')}
                             editedTitle = {this.state.editedVersion.title}
                             handelEdit = {this.handelEdit}
                             />
@@ -218,7 +213,7 @@ class SnippetPage extends Component {
                     <div className="editableElement position-relative">
                         <KeywordsModuleJsx 
                             keywords={this.snippet.keywords} 
-                            isEditable={this.state.editableMoudules.includes('keywords')}
+                            isEditable={this.state.editableModules.includes('keywords')}
                             editedKeywords = {this.state.editedVersion.keywords}
                             handelEdit = {this.handelEdit}
                             />
@@ -236,7 +231,7 @@ class SnippetPage extends Component {
                         content={this.snippet.content} 
                         handelEdit={this.handelEdit}
                         textAlignment  = "left"
-                        readOnly = {!this.state.editableMoudules.includes('content')}
+                        readOnly = {!this.state.editableModules.includes('content')}
                         />
                         <button className={"editBtn btn btn-outline-success btn-sm  " + ((isModifiable)?" showHideToggle ":"d-none")} onClick={()=>{this.enableEdit('content')}}><FontAwesomeIcon icon={faPen} /></button>
 
