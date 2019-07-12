@@ -3,7 +3,7 @@ import {connect } from 'react-redux'
 import {fetchAllSnippets , searchSnippets} from '../store/actions'
 import SnippetCard from '../components/SnippetCard'
 import SingInSignOut from '../components/SingInSignOut'
-import NavbarComponent from '../components/NavbarComponent'
+import NavbarWithSearchComponent from '../components/NavbarWithSearchComponent'
 import SidebarComponent from '../components/SidebarComponent'
 import InputGroup from 'react-bootstrap/InputGroup';
 import Form from 'react-bootstrap/Form';
@@ -41,44 +41,40 @@ const mapDispatchToProps = dispatch => {
 
 
 class HomePage extends Component {
-    delayTimer;
     constructor(props){
         super(props);
         let params = queryString.parse(this.props.location.search);
         if(params.search){
-            this.state = {"searchKey":params.search};
-            this.doSearch();
+            this.state = {searchKey:params.search};
         }else{
-            this.state = {"searchKey" : ""}
+            this.state = {searchKey : ""}
         }
+
 
     }
 
     componentDidMount(){
-
         let params = queryString.parse(this.props.location.search);
         if(!params.search){
             // we have handled search in constructor before.
             this.props.fetchAllSnippets();
+            this.setState({searchKey: ""});
+
         }      
     }
 
+    resetSearch =() =>{
+        // reset search on X button in search component
+        this.props.history.push('/')
+        this.setState({"searchKey" : ""});
 
-    handleSubmit =  (e) => {
-        e.preventDefault();
+
+        
+
     }
 
-    handleSearchInput = (e) =>{
-        this.setState({"searchKey":e.target.value});
-        clearTimeout(this.delayTimer);
-        this.delayTimer = setTimeout(() => {
-            this.doSearch();
-        }, SEARCHBOX_DELAY);
-    }
-    doSearch = () =>{
-        this.props.searchSnippets(this.state.searchKey.trim());
-    }
     render() {
+
         let snippetsJsx = this.props.snippets.map((snippet,index) =>{
             return(
                 <SnippetCard key={"snippetCard" + index} snippet={snippet} userId={this.props.userId} />
@@ -90,11 +86,11 @@ class HomePage extends Component {
                     <SidebarComponent />
                 </div>
                 <div className="col-11 p-0">
-                    <NavbarComponent 
-                    searchKey={this.state.searchKey} 
-                    handleSubmit={this.handleSubmit} 
-                    handleSearchInput={this.handleSearchInput} 
-                    doSearch={this.doSearch}/>
+                    <NavbarWithSearchComponent 
+                        searchKey={this.state.searchKey} 
+                        resetSearch={this.resetSearch} 
+                        
+                    />
 
                         {snippetsJsx}
 

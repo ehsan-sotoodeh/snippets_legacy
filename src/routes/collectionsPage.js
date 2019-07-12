@@ -69,7 +69,6 @@ class collectionsPage extends Component {
             )
         }
         const collectionArray = objectToArray(this.props.collection);
-        console.log(collectionArray)
         collectionArray.sort(function(a, b) {
             return b[1] - a[1];
         });
