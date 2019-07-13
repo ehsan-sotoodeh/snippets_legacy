@@ -6,6 +6,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome,faUndo,faPen,faTimes,faCloudUploadAlt } from '@fortawesome/free-solid-svg-icons';
 import RichEditorExample from '../components/RichEditorExample'
 import Cookies from 'universal-cookie';
+import SidebarComponent from '../components/SidebarComponent'
+import NavbarComponent from '../components/NavbarComponent'
+
 const cookies = new Cookies();
 
 const mapStateToProps = (state) =>{
@@ -38,6 +41,8 @@ class SnippetPage extends Component {
 
     constructor(props){
         super(props);
+        this.pageTitle = "";
+
         this.activeSnippet  = parseInt(this.props.match.params.snippetId);
         this.isNewSnippet = (this.activeSnippet === -1)? true:false;
 
@@ -173,68 +178,70 @@ class SnippetPage extends Component {
         const isModifiable = (this.props.userId === this.snippet.user)?true:false;
 
         return (
-            <div className="snippetPage">
+            <div className="snippetPage fullHeightPage row m-0">
+                <div className="col-1 p-0">
+                    <SidebarComponent />
+                </div>
+                <div className="col-11 p-0">
+                    <NavbarComponent pageTitle={this.pageTitle} />
 
-                <div className=" mb-1  bg-dark ">
-                    <div className="container d-flex bd-highlight ">
-                        <div className="mr-auto p-2 bd-highlight">
-                            <NavLink className="btn btn-primary" exact to={`/`}><FontAwesomeIcon icon={faHome} /> Home </NavLink>
+                    <div className={"mb-1  bg-light " + ((isModifiable)?"":" d-none")}  >
+                        <div className="container d-flex bd-highlight justify-content-end ">
+                                <SnippetModifyButtons 
+                                    saveSnippet={this.saveSnippet}
+                                    updateSnippet={this.updateSnippet}
+                                    refreshSnippet={this.refreshSnippet}
+                                    deleteSnippet={this.deleteSnippet}
+                                    isNewSnippet={this.isNewSnippet}
+                                    isUpdateButtonActive={isUpdateButtonActive}
+                                    
+                                    />
                         </div>
-                            <SnippetModifyButtons 
-                                active = {isModifiable}
-                                saveSnippet={this.saveSnippet}
-                                updateSnippet={this.updateSnippet}
-                                refreshSnippet={this.refreshSnippet}
-                                deleteSnippet={this.deleteSnippet}
-                                isNewSnippet={this.isNewSnippet}
-                                isUpdateButtonActive={isUpdateButtonActive}
-                                
-                                />
-                    </div>
-                
-                </div>
-
-                <div className="mx-3">
-                    <p className={(isUpdateButtonActive)?"d-none":"fontSize08 text-danger"}>
-                        {this.state.errorMessage}
-                    </p>
-                    <div className="editableElement position-relative">
-                        <TitleModuleJsx 
-                            title={this.snippet.title} 
-                            isEditable={this.state.editableModules.includes('title')}
-                            editedTitle = {this.state.editedVersion.title}
-                            handelEdit = {this.handelEdit}
-                            />
-                            <button className={"editBtn btn btn-outline-success btn-sm  " + ((isModifiable)?" showHideToggle ":"d-none")} onClick={()=>{this.enableEdit('title')}}><FontAwesomeIcon icon={faPen} /></button>
-
-
-                    </div>
-
-                    <div className="editableElement position-relative">
-                        <KeywordsModuleJsx 
-                            keywords={this.snippet.keywords} 
-                            isEditable={this.state.editableModules.includes('keywords')}
-                            editedKeywords = {this.state.editedVersion.keywords}
-                            handelEdit = {this.handelEdit}
-                            />
-                            <button className={"editBtn btn btn-outline-success btn-sm  " + ((isModifiable)?" showHideToggle ":"d-none")} onClick={()=>{this.enableEdit('keywords')}}><FontAwesomeIcon icon={faPen} /></button>
-
-                    </div>
-
                     
+                    </div>
 
-                </div>
+                    <div className="mx-3">
+                        <p className={(isUpdateButtonActive)?"d-none":"fontSize08 text-danger"}>
+                            {this.state.errorMessage}
+                        </p>
+                        <div className="editableElement position-relative">
+                            <TitleModuleJsx 
+                                title={this.snippet.title} 
+                                isEditable={this.state.editableModules.includes('title')}
+                                editedTitle = {this.state.editedVersion.title}
+                                handelEdit = {this.handelEdit}
+                                />
+                                <button className={"editBtn btn btn-outline-success btn-sm  " + ((isModifiable)?" showHideToggle ":"d-none")} onClick={()=>{this.enableEdit('title')}}><FontAwesomeIcon icon={faPen} /></button>
 
-                <div className="editableElement position-relative">
 
-                    <RichEditorExample 
-                        content={this.snippet.content} 
-                        handelEdit={this.handelEdit}
-                        textAlignment  = "left"
-                        readOnly = {!this.state.editableModules.includes('content')}
-                        />
-                        <button className={"editBtn btn btn-outline-success btn-sm  " + ((isModifiable)?" showHideToggle ":"d-none")} onClick={()=>{this.enableEdit('content')}}><FontAwesomeIcon icon={faPen} /></button>
+                        </div>
 
+                        <div className="editableElement position-relative">
+                            <KeywordsModuleJsx 
+                                keywords={this.snippet.keywords} 
+                                isEditable={this.state.editableModules.includes('keywords')}
+                                editedKeywords = {this.state.editedVersion.keywords}
+                                handelEdit = {this.handelEdit}
+                                />
+                                <button className={"editBtn btn btn-outline-success btn-sm  " + ((isModifiable)?" showHideToggle ":"d-none")} onClick={()=>{this.enableEdit('keywords')}}><FontAwesomeIcon icon={faPen} /></button>
+
+                        </div>
+
+                        
+
+                    </div>
+
+                    <div className="editableElement position-relative">
+
+                        <RichEditorExample 
+                            content={this.snippet.content} 
+                            handelEdit={this.handelEdit}
+                            textAlignment  = "left"
+                            readOnly = {!this.state.editableModules.includes('content')}
+                            />
+                            <button className={"editBtn btn btn-outline-success btn-sm  " + ((isModifiable)?" showHideToggle ":"d-none")} onClick={()=>{this.enableEdit('content')}}><FontAwesomeIcon icon={faPen} /></button>
+
+                    </div>
                 </div>
             </div>
         )
@@ -242,10 +249,7 @@ class SnippetPage extends Component {
 }
 
 
-function SnippetModifyButtons({active,saveSnippet,updateSnippet,refreshSnippet,deleteSnippet,isNewSnippet,isUpdateButtonActive}){
-    if(!active){
-        return(<></>)
-    }
+function SnippetModifyButtons({saveSnippet,updateSnippet,refreshSnippet,deleteSnippet,isNewSnippet,isUpdateButtonActive}){
     const saveUpdateButtonJsx = (isNewSnippet)?(
         <button className={"btn btn-info  " + ((isUpdateButtonActive)? "":"disabled") }  onClick={()=>{saveSnippet()}}> <FontAwesomeIcon icon={faCloudUploadAlt} />&nbsp; &nbsp; Save </button>
     ):(

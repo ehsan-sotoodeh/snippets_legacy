@@ -2,22 +2,12 @@ import React, { Component } from 'react'
 import {connect } from 'react-redux'
 import {fetchAllSnippets , searchSnippets} from '../store/actions'
 import SnippetCard from '../components/SnippetCard'
-import SingInSignOut from '../components/SingInSignOut'
 import NavbarWithSearchComponent from '../components/NavbarWithSearchComponent'
 import SidebarComponent from '../components/SidebarComponent'
-import InputGroup from 'react-bootstrap/InputGroup';
-import Form from 'react-bootstrap/Form';
-import Col from 'react-bootstrap/Col';
-import Button from 'react-bootstrap/Button';
-import Row from 'react-bootstrap/Row';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch,faPlus } from '@fortawesome/free-solid-svg-icons'; 
-import { NavLink } from "react-router-dom";
 import queryString from 'query-string';
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
-const SEARCHBOX_DELAY = 500; // add to settings file
 
 const mapStateToProps = (state) =>{
     return {
@@ -43,6 +33,7 @@ const mapDispatchToProps = dispatch => {
 class HomePage extends Component {
     constructor(props){
         super(props);
+        this.pageTitle = "Snippets"
         let params = queryString.parse(this.props.location.search);
         if(params.search){
             this.state = {searchKey:params.search};
@@ -67,10 +58,6 @@ class HomePage extends Component {
         // reset search on X button in search component
         this.props.history.push('/')
         this.setState({"searchKey" : ""});
-
-
-        
-
     }
 
     render() {
@@ -89,6 +76,7 @@ class HomePage extends Component {
                     <NavbarWithSearchComponent 
                         searchKey={this.state.searchKey} 
                         resetSearch={this.resetSearch} 
+                        pageTitle = {this.pageTitle}
                         
                     />
 

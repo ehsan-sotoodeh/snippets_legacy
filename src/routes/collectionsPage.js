@@ -37,30 +37,12 @@ class collectionsPage extends Component {
 
     constructor(props){
         super(props);
-
+        this.pageTitle = "Collection";
     }
 
     componentDidMount(){
         this.props.fetchCollection();
     }
-
-    handleSubmit =  (e) => {
-        e.preventDefault();
-    }
-
-    handleSearchInput = (e) =>{
-        this.setState({"searchKey":e.target.value});
-        clearTimeout(this.delayTimer);
-        this.delayTimer = setTimeout(() => {
-            this.doSearch();
-        }, SEARCHBOX_DELAY);
-    }
-    doSearch = () =>{
-        this.props.searchSnippets(this.state.searchKey.trim());
-    }
-
-
-
 
     render() {
         if(Object.keys(this.props.collection).length === 0 ){
@@ -85,13 +67,10 @@ class collectionsPage extends Component {
         return (
             <div className="fullHeightPage row m-0">
                 <div className="col-1 p-0">
-                    <SidebarComponent />
+                    <SidebarComponent  />
                 </div>
                 <div className="col-11 p-0">
-                    <NavbarComponent 
-                    handleSubmit={this.handleSubmit} 
-                    handleSearchInput={this.handleSearchInput} 
-                    doSearch={this.doSearch}/>
+                    <NavbarComponent pageTitle={this.pageTitle} />
                     <div className="">
                         {keywordsJSX}
                     </div>
