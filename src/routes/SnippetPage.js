@@ -179,7 +179,7 @@ class SnippetPage extends Component {
 
         return (
             <div className="snippetPage fullHeightPage row m-0">
-                <div className="col-1 p-0">
+                <div className="sidebarColumn col-1 p-0">
                     <SidebarComponent />
                 </div>
                 <div className="col-11 p-0">

@@ -19,6 +19,10 @@
 
 }
 
+.sidebarColumn{
+  z-index: 1;
+}
+
 .loginDropDown .googleLogin{
   background-color:#db3236;
   color:white;

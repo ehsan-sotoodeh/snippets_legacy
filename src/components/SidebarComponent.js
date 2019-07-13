@@ -1,12 +1,8 @@
 import React from 'react'
-import InputGroup from 'react-bootstrap/InputGroup';
-import Form from 'react-bootstrap/Form';
-import Col from 'react-bootstrap/Col';
-import Button from 'react-bootstrap/Button';
-import Row from 'react-bootstrap/Row';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome,faPlus,faGlobe,faPenNib,faTh,faBookmark } from '@fortawesome/free-solid-svg-icons'; 
 import { NavLink } from "react-router-dom";
+import SingInSignOut from './SingInSignOut'
 
 const SidebarComponent = () => {
     return (
@@ -37,6 +33,8 @@ const SidebarComponent = () => {
                         <span className="fontSize07" >Collection</span>
                     </NavLink>
                 </li>
+                <SingInSignOut />
+
             </ul>
 
         </div>
