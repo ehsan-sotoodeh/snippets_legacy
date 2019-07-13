@@ -19,15 +19,7 @@ const mapStateToProps = (state) =>{
 
 const mapDispatchToProps = dispatch => {
     return{
-        // fetchOneSnippetById(activeSnippet){
-        //     dispatch(fetchOneSnippetById(activeSnippet))
-        // },
-        // deleteSnippet(activeSnippet){
-        //     dispatch(deleteSnippet(activeSnippet))
-        // },
-        // updateSnippet(snippet){
-        //     dispatch(updateSnippet(snippet))
-        // }
+
     }
 }
 class  SingInSignOut extends Component {
@@ -64,15 +56,25 @@ class  SingInSignOut extends Component {
     render(){
         if(this.state.username){
             return (
-                <ProfileComponent 
-                    profilePhoto={this.state.profilePhoto}
-                    username={this.state.username}
-                    handelLogout = {this.handelLogout}
-                 />
+                <div>
+                    <ProfileComponent 
+                        profilePhoto={this.state.profilePhoto}
+                        username={this.state.username}
+                        handelLogout = {this.handelLogout}
+                    />
+                    <span className="fontSize08 p-0 m-0 ">Profile</span>
+
+                </div>
+
             )
         }else{
             return(
-                <LoginComponent handelLogin={this.handelLogin} />
+                <div>
+                    <LoginComponent handelLogin={this.handelLogin} />
+                    <span className="fontSize08 p-0 m-0 ">LogIn</span>
+                
+                </div>
+
             )
         }
 
@@ -87,29 +89,30 @@ class  SingInSignOut extends Component {
 
 function ProfileComponent({profilePhoto,username,handelLogout}){
     return (
+        <div>
+            <Dropdown alignRight className="mt-4" >
+                <Dropdown.Toggle size="sm" className="noBackground border-0 p-0 m-0" variant="info" direction="up" id="dropdown-basic">
+                    <FontAwesomeIcon className="fontSize12  "   icon={faUser} />
+                </Dropdown.Toggle>
+                <Dropdown.Menu className="loginDropDown p-0"  > 
+                    <Dropdown.Item className=""   >
+                    <div className="" onFocus={()=>{alert()}}>
+                        <div className="profile-container col-md-12 col-sm-12 text-center">
+                                <img src={profilePhoto} alt="" className="header-avatar" />
+                                <div className="header-fullname font-weight-bold">{username}</div>              
+                        </div>
+                    </div>            
 
-        <Dropdown alignRight >
-            <Dropdown.Toggle size="sm" variant="outline-secondary " direction="up" id="dropdown-basic">
-                <FontAwesomeIcon icon={faUser} /> 
-            </Dropdown.Toggle>
-    
-            <Dropdown.Menu className="loginDropDown p-0"  > 
-                <Dropdown.Item className=""   >
-                <div className="" onFocus={()=>{alert()}}>
-                    <div className="profile-container col-md-12 col-sm-12 text-center">
-                            <img src={profilePhoto} alt="" className="header-avatar" />
-                            <div className="header-fullname font-weight-bold">{username}</div>              
-                    </div>
-                </div>            
+                    </Dropdown.Item>
 
-                </Dropdown.Item>
+                    <Dropdown.Item className="bg-info text-light d-flex justify-content-center align-items-center" onClick={handelLogout} >
+                        <FontAwesomeIcon icon={faSignOutAlt}   /> &nbsp;&nbsp;  Sing out 
+                    </Dropdown.Item>
 
-                <Dropdown.Item className="bg-info text-light d-flex justify-content-center align-items-center" onClick={handelLogout} >
-                    <FontAwesomeIcon icon={faSignOutAlt}   /> &nbsp;&nbsp;  Sing out 
-                </Dropdown.Item>
+                </Dropdown.Menu>
+            </Dropdown>
 
-            </Dropdown.Menu>
-        </Dropdown>
+        </div>
     )
 }
 

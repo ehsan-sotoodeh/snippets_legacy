@@ -11,29 +11,29 @@ const SidebarComponent = () => {
                 <li>
                     <NavLink className="sidebarMenuItem d-flex flex-column"  exact to={`/`} >
                         <FontAwesomeIcon className="NavIcon" icon={faHome} />
-                        <span className="fontSize07 " >Home</span>
+                        <span className="fontSize07 mt-2" >Home</span>
                     </NavLink>
                 </li>
                 <li>
                     <NavLink className="sidebarMenuItem d-flex flex-column"  exact to={`/snippet/-1`} >
                         <FontAwesomeIcon className="NavIcon" icon={faPenNib } />
-                        <span className="fontSize07 " >Add</span>
+                        <span className="fontSize07 mt-2 " >Add</span>
                     </NavLink>
                 </li>
                 <li>
                     <NavLink className="sidebarMenuItem d-flex flex-column justify-content-center "  exact to={`/mySnippets`} >
                         <FontAwesomeIcon className="NavIcon" icon={faBookmark} />
-                        <span className="fontSize07 " >My Snippets</span>
+                        <span className="fontSize07 mt-2 " >My Snippets</span>
                     </NavLink>
                 </li>
 
                 <li>
                     <NavLink className="sidebarMenuItem d-flex flex-column"  exact to={`/collections`} >
                         <FontAwesomeIcon className="NavIcon" icon={faTh} />
-                        <span className="fontSize07" >Collection</span>
+                        <span className="fontSize07 mt-2" >Collection</span>
                     </NavLink>
                 </li>
-                <SingInSignOut />
+                <SingInSignOut  />
 
             </ul>
 

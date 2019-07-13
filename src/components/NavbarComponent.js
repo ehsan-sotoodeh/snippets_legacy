@@ -35,7 +35,6 @@ class NavbarComponent extends Component {
                 </NavDropdown>
                 </Nav>
                 
-                <SingInSignOut className="col-sm-12"/>
     
             </Navbar.Collapse>
             </Navbar>
