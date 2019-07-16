@@ -5,10 +5,12 @@ import addIcon from '../images/icons/add.svg'
 import collection from '../images/icons/apps.svg'
 import bookmark from '../images/icons/bookmark.svg'
 import home from '../images/icons/home.svg'
+import logo from '../images/icons/lamp.svg'
 
 const SidebarComponent = () => {
     return (
         <div className="sidebar h-100 px-0">
+        <img className="logoIcon" src={logo} />
             <ul className="noBullet text-light">
                 <li>
                     <NavLink className="sidebarMenuItem d-flex flex-column mt-3"  exact to={`/`} >

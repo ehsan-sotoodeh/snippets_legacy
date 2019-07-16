@@ -62,7 +62,7 @@ class SnippetCard extends Component{
     
         const bookmarkedClass = (snippet.bookmarkId)? "text-primary" : "text-secondary";
         return (
-            <div className="card snippetCard  col-12 ml-2 my-3 " style={{ width: '90%' }}>
+            <div className={"card col-12 ml-2 my-3 " +  ((isCreatedByLoggedInUser)?" snippetCardActiveBorder ":"snippetCardDeactiveBorder")} style={{ width: '95%' }}>
 
                     <div className="row ">
                         <div className="col-md-12 ">
@@ -82,9 +82,9 @@ class SnippetCard extends Component{
     
                                 </div>
                                     <div className="d-flex justify-content-end m-0">
-                                        <FontAwesomeIcon 
+                                        {/* <FontAwesomeIcon 
                                             className={"fontSize11 mx-2 text-secondary " + ((isCreatedByLoggedInUser)?" ":"d-none")}
-                                             icon={faUserEdit} />
+                                             icon={faUserEdit} /> */}
                                             <FontAwesomeIcon 
                                                 onClick={this.bookmarkToggle}
                                                 className={"fontSize11 mx-2 pointer "+ bookmarkedClass} 

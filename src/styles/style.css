@@ -23,6 +23,13 @@
   z-index: 1;
   flex: 0 0 65px;
 }
+.logoIcon{
+  width: 50px;
+  height: 50px;
+  top: 10px;
+  position: fixed;
+  left:7px;
+}
 
 
 .noBackground{
@@ -229,18 +236,17 @@ padding-bottom: 35px;
 /* sidebar */
 .sidebarMenuItem{
   color:#fff;
-  margin: 45px auto;
+  margin: 25px auto;
   font-size: 1.5rem
 }
 
 .sidebar ul{
   position: fixed;
-  top:50px;
+  top:80px;
   left:0px;
   padding-left: 7px;
 }
 .sidebar ul li{ 
-  margin-top:30px;
 }
 .sidebar .NavIcon{
   margin: 0px auto;
@@ -251,8 +257,12 @@ padding-bottom: 35px;
 
 /* snippetCard */
 
-.snippetCard{
+.snippetCardActiveBorder{
   border-left: 6px solid rgb(255, 123, 0) !important; 
+
+}
+.snippetCardDeactiveBorder{
+  border-left: 6px solid rgb(119, 119, 119) !important; 
 
 }
 
