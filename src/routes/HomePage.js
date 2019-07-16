@@ -69,10 +69,10 @@ class HomePage extends Component {
         })
         return (
             <div className="fullHeightPage row m-0">
-                <div className="sidebarColumn col-1 p-0">
+                <div className="sidebarColumn  p-0">
                     <SidebarComponent />
                 </div>
-                <div className="col-11 p-0">
+                <div className=" col  p-0">
                     <NavbarWithSearchComponent 
                         searchKey={this.state.searchKey} 
                         resetSearch={this.resetSearch} 

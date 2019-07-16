@@ -21,7 +21,9 @@
 
 .sidebarColumn{
   z-index: 1;
+  flex: 0 0 65px;
 }
+
 
 .noBackground{
   background-color: #00000000 !important;
@@ -227,7 +229,7 @@ padding-bottom: 35px;
 /* sidebar */
 .sidebarMenuItem{
   color:#fff;
-  margin: 15px auto;
+  margin: 45px auto;
   font-size: 1.5rem
 }
 
@@ -235,15 +237,15 @@ padding-bottom: 35px;
   position: fixed;
   top:50px;
   left:0px;
-  padding-left: 10px;
+  padding-left: 7px;
 }
 .sidebar ul li{ 
   margin-top:30px;
 }
 .sidebar .NavIcon{
   margin: 0px auto;
-  width: 30px;
-  height:30px;
+  width: 25px;
+  height:25px;
 }
 
 

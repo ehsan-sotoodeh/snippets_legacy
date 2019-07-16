@@ -11,7 +11,7 @@ const SidebarComponent = () => {
         <div className="sidebar h-100 px-0">
             <ul className="noBullet text-light">
                 <li>
-                    <NavLink className="sidebarMenuItem d-flex flex-column"  exact to={`/`} >
+                    <NavLink className="sidebarMenuItem d-flex flex-column mt-3"  exact to={`/`} >
                         <img className="NavIcon" src={home} />
                         <span className="fontSize07 mt-2" >Home</span>
                     </NavLink>
@@ -25,7 +25,7 @@ const SidebarComponent = () => {
                 <li>
                     <NavLink className="sidebarMenuItem d-flex flex-column justify-content-center "  exact to={`/mySnippets`} >
                         <img className="NavIcon" src={bookmark} />
-                        <span className="fontSize07 mt-2 " >My Snippets</span>
+                        <span className="fontSize07 mt-2 " >Favorites</span>
                     </NavLink>
                 </li>
 
