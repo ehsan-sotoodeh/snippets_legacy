@@ -59,13 +59,33 @@ class SnippetCard extends Component{
         });
         const isCreatedByLoggedInUser = (this.props.userId === snippet.user)?true:false;
 
-    
-        const bookmarkedClass = (snippet.bookmarkId)? "text-primary" : "text-secondary";
+        const bookmarkCount = (parseInt(snippet.title[0]))?
+                                parseInt(snippet.title[0]): 
+                                lettersArray.indexOf(snippet.title[0].toLowerCase());
+
+        console.log(bookmarkCount);
+        const bookmarkedClass = (snippet.bookmarkId)? "text-primary" : " deactiveBookmarkTag";
         return (
             <div className={"card col-12 ml-2 my-3 " +  ((isCreatedByLoggedInUser)?" snippetCardActiveBorder ":"snippetCardDeactiveBorder")} style={{ width: '95%' }}>
 
                     <div className="row ">
                         <div className="col-md-12 ">
+                            <div className="bookmarkTagContainer">
+                                <FontAwesomeIcon 
+                                    onClick={this.bookmarkToggle}
+                                    className={"fontSize20 mx-2 pointer "+ bookmarkedClass} 
+                                    icon={faBookmark} />
+                                    <span 
+                                        className={
+                                                " "+((snippet.bookmarkId)? " text-light" : " text-dark")+
+                                                " "+((bookmarkCount < 10)? " oneDigit" : " twoDigit")
+                                                
+                                                } >
+                                        {bookmarkCount}
+                                    </span>
+                            </div>
+ 
+
                             <div className="card-body padding05" >
                             <NavLink snippet={snippet} exact to={
                                 {
@@ -82,14 +102,11 @@ class SnippetCard extends Component{
     
                                 </div>
                                     <div className="d-flex justify-content-end m-0">
-                                        {/* <FontAwesomeIcon 
-                                            className={"fontSize11 mx-2 text-secondary " + ((isCreatedByLoggedInUser)?" ":"d-none")}
-                                             icon={faUserEdit} /> */}
-                                            <FontAwesomeIcon 
-                                                onClick={this.bookmarkToggle}
-                                                className={"fontSize11 mx-2 pointer "+ bookmarkedClass} 
-                                                icon={faBookmark} />
-                                        {/* <FontAwesomeIcon className="fontSize11 mx-2 text-secondary " icon={faShareAlt} /> */}
+                                        <FontAwesomeIcon 
+                                            className={"fontSize11 mx-2  orangeText " + ((isCreatedByLoggedInUser)?" ":"d-none")}
+                                             icon={faUserEdit} />
+       
+                                        <FontAwesomeIcon className="fontSize11 mx-2 text-secondary " icon={faShareAlt} />
                                     </div>
                                 </div>
                             </div>
@@ -100,6 +117,8 @@ class SnippetCard extends Component{
     }
 
 }
+
+const lettersArray = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
 
 export default connect(mapStateToProps,mapDispatchToProps)(SnippetCard);
 

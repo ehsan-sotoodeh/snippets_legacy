@@ -258,13 +258,37 @@ padding-bottom: 35px;
 /* snippetCard */
 
 .snippetCardActiveBorder{
-  border-left: 6px solid rgb(255, 123, 0) !important; 
+  border-left: 6px solid #ff7b00 !important; 
 
 }
 .snippetCardDeactiveBorder{
   border-left: 6px solid rgb(119, 119, 119) !important; 
 
 }
+.orangeText{
+  color : #ff7b00;
+}
+.bookmarkTagContainer{
+  position: absolute;
+  right: 0;
+  top: -10px;
+}
+.bookmarkTagContainer span{
+  position: absolute;
+  font-weight: 600;
+}
+.bookmarkTagContainer .oneDigit{
+  right: 15px;
+}
+.bookmarkTagContainer .twoDigit{
+  right: 12px;
+}
+
+
+.deactiveBookmarkTag{
+  color: #adb5bd;
+}
+
 
 
 /* collection page */
