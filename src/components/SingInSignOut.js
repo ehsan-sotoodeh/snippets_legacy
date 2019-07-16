@@ -6,6 +6,7 @@ import {connect } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome' 
 import { faKey,faUser,faSignOutAlt } from '@fortawesome/free-solid-svg-icons'  
 import { faFacebook,faTwitter,faGooglePlus } from '@fortawesome/free-brands-svg-icons'  
+import avatar from '../images/icons/avatar.svg'
 
 const cookies = new Cookies();
 
@@ -92,7 +93,7 @@ function ProfileComponent({profilePhoto,username,handelLogout}){
         <div>
             <Dropdown alignRight className="mt-4" >
                 <Dropdown.Toggle size="sm" className="noBackground border-0 p-0 m-0" variant="info" direction="up" id="dropdown-basic">
-                    <FontAwesomeIcon className="fontSize12  "   icon={faUser} />
+                    <img className="fontSize12 NavIcon"   src={avatar} />
                 </Dropdown.Toggle>
                 <Dropdown.Menu className="loginDropDown p-0"  > 
                     <Dropdown.Item className=""   >

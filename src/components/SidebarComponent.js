@@ -1,8 +1,10 @@
 import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome,faPlus,faGlobe,faPenNib,faTh,faBookmark } from '@fortawesome/free-solid-svg-icons'; 
 import { NavLink } from "react-router-dom";
 import SingInSignOut from './SingInSignOut'
+import addIcon from '../images/icons/add.svg'
+import collection from '../images/icons/apps.svg'
+import bookmark from '../images/icons/bookmark.svg'
+import home from '../images/icons/home.svg'
 
 const SidebarComponent = () => {
     return (
@@ -10,26 +12,26 @@ const SidebarComponent = () => {
             <ul className="noBullet text-light">
                 <li>
                     <NavLink className="sidebarMenuItem d-flex flex-column"  exact to={`/`} >
-                        <FontAwesomeIcon className="NavIcon" icon={faHome} />
+                        <img className="NavIcon" src={home} />
                         <span className="fontSize07 mt-2" >Home</span>
                     </NavLink>
                 </li>
                 <li>
                     <NavLink className="sidebarMenuItem d-flex flex-column"  exact to={`/snippet/-1`} >
-                        <FontAwesomeIcon className="NavIcon" icon={faPenNib } />
+                        <img className="NavIcon" src={addIcon} />
                         <span className="fontSize07 mt-2 " >Add</span>
                     </NavLink>
                 </li>
                 <li>
                     <NavLink className="sidebarMenuItem d-flex flex-column justify-content-center "  exact to={`/mySnippets`} >
-                        <FontAwesomeIcon className="NavIcon" icon={faBookmark} />
+                        <img className="NavIcon" src={bookmark} />
                         <span className="fontSize07 mt-2 " >My Snippets</span>
                     </NavLink>
                 </li>
 
                 <li>
                     <NavLink className="sidebarMenuItem d-flex flex-column"  exact to={`/collections`} >
-                        <FontAwesomeIcon className="NavIcon" icon={faTh} />
+                        <img className="NavIcon" src={collection} />
                         <span className="fontSize07 mt-2" >Collection</span>
                     </NavLink>
                 </li>
