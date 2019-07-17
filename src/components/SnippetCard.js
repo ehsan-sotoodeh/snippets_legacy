@@ -58,22 +58,22 @@ class SnippetCard extends Component{
             )
         });
         const isCreatedByLoggedInUser = (this.props.userId === snippet.user)?true:false;
-
+        
+        // TODO get real number of bookmarks count / for now it makes a number based on the first letter of the title
         const bookmarkCount = (parseInt(snippet.title[0]))?
                                 parseInt(snippet.title[0]): 
                                 lettersArray.indexOf(snippet.title[0].toLowerCase());
 
-        console.log(bookmarkCount);
         const bookmarkedClass = (snippet.bookmarkId)? "text-primary" : " deactiveBookmarkTag";
         return (
-            <div className={"card col-12 ml-2 my-3 " +  ((isCreatedByLoggedInUser)?" snippetCardActiveBorder ":"snippetCardDeactiveBorder")} style={{ width: '95%' }}>
+            <div className={"card col-12 ml-2 my-3 snippetCard" +  ((isCreatedByLoggedInUser)?" snippetCardActiveBorder ":"snippetCardDeactiveBorder")} style={{ width: '95%' }}>
 
                     <div className="row ">
                         <div className="col-md-12 ">
-                            <div className="bookmarkTagContainer">
+                            <div className="bookmarkTagContainer pointer" onClick={this.bookmarkToggle}>
                                 <FontAwesomeIcon 
-                                    onClick={this.bookmarkToggle}
-                                    className={"fontSize20 mx-2 pointer "+ bookmarkedClass} 
+                                    
+                                    className={"fontSize20 mx-2  "+ bookmarkedClass} 
                                     icon={faBookmark} />
                                     <span 
                                         className={
@@ -93,7 +93,7 @@ class SnippetCard extends Component{
                                     snippet:{...snippet}
                                 }
                                 }>
-                                    <div className="card-title d-flex justify-content-start">{snippet.title}</div>
+                                    <div className="card-title d-flex justify-content-start text-dark fontSize12">{snippet.title}</div>
                                 </NavLink>
                                 <hr/>
                                 <div className="d-fle">

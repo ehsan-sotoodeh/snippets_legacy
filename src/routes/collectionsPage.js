@@ -57,21 +57,30 @@ class collectionsPage extends Component {
 
         let keywordsJSX = collectionArray.map(keyword =>{
             return(
-                <NavLink to={ "/?search=" + keyword[0]} className="keywordPill btn btn-outline-info  px-2 py-1 m-2 float-left" >
-                    <span className=" fontSize10 font-weight-bold pr-3">{keyword[0]}</span>
-                    <span className="fontSize07 badge badge-secondary">{keyword[1]}</span>
-                    
-                </NavLink>
+                <div className="card col-6  col-sm-6 col-md-4  col-lg-3  m-2  " >
+                    <NavLink to={ "/?search=" + keyword[0]} className="keywordPill   px-2 py-1 m-2 float-left" >
+                    <div className="d-flex justify-content-start">
+                        <span className=" fontSize10 font-weight-bold  text-dark ">{keyword[0]}</span>
+                    </div>
+                    <div className="badgeContainer">
+                        <span className="fontSize07 badge badge-secondary ">{keyword[1]}</span>
+
+                    </div>
+
+                        
+                    </NavLink>
+
+                </div>
             )
         })
         return (
-            <div className="fullHeightPage row m-0">
-                <div className="sidebarColumn col-1 p-0">
-                    <SidebarComponent  />
+            <div className="fullHeightPage collectionPage row m-0">
+            <div className="sidebarColumn  p-0">
+                    <SidebarComponent />
                 </div>
-                <div className="col-11 p-0">
+                <div className="col p-0">
                     <NavbarComponent pageTitle={this.pageTitle} />
-                    <div className="">
+                    <div className="row m-0 p-0">
                         {keywordsJSX}
                     </div>
                 </div>

@@ -101,11 +101,7 @@
   margin-top: 15px;
   text-align: justify;
 }
-.profile-container .profile-header .profile-info .btn-follow {
-/*    position: absolute;
-  top: 45px;
-  right: 40px;*/
-}
+
 .btn-palegreen, .btn-palegreen:focus {
   background-color: #a0d468!important;
   border-color: #a0d468;
@@ -256,7 +252,11 @@ padding-bottom: 35px;
 
 
 /* snippetCard */
-
+.snippetCard{
+  box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.11);
+  -webkit-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.11);
+  -moz-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.11);
+}
 .snippetCardActiveBorder{
   border-left: 6px solid #ff7b00 !important; 
 
@@ -292,6 +292,19 @@ padding-bottom: 35px;
 
 
 /* collection page */
+.collectionPage .card{
+  box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.11);
+  -webkit-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.11);
+  -moz-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.11);
+  border-left: 6px solid #ff7b00 !important; 
+}
+
+.badgeContainer{
+  position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
 .keywordPill{
   line-height: 1;
   border-width: 2px;
