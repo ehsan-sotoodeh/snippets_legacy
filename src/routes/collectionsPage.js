@@ -55,30 +55,33 @@ class collectionsPage extends Component {
             return b[1] - a[1];
         });
 
-        let keywordsJSX = collectionArray.map(keyword =>{
+        let keywordsJSX = collectionArray.map((keyword,index) =>{
             return(
-                <div className="card col-6  col-sm-6 col-md-4  col-lg-3  m-2  " >
-                    <NavLink to={ "/?search=" + keyword[0]} className="keywordPill   px-2 py-1 m-2 float-left" >
-                    <div className="d-flex justify-content-start">
-                        <span className=" fontSize10 font-weight-bold  text-dark ">{keyword[0]}</span>
-                    </div>
-                    <div className="badgeContainer">
-                        <span className="fontSize07 badge badge-secondary ">{keyword[1]}</span>
+                <div  key={`keywordCard${index}`} className=" col-12 col-sm-6 col-md-4 col-lg-3 " >
+                    <div className="card mt-3">
+                        <NavLink to={ "/?search=" + keyword[0]} className="keywordPill    py-1 my-2 float-left" >
+                        <div className="d-flex justify-content-start">
+                            <span className="ml-2 fontSize11  text-dark ">{keyword[0]}</span>
+                        </div>
+                        <div className="badgeContainer">
+                            <span className="fontSize08 badge badge-secondary ">{keyword[1]}</span>
+
+                        </div>
+
+                            
+                        </NavLink>
 
                     </div>
-
-                        
-                    </NavLink>
 
                 </div>
             )
         })
         return (
             <div className="fullHeightPage collectionPage row m-0">
-            <div className="sidebarColumn  p-0">
+                <div className="sidebarColumn  p-0">
                     <SidebarComponent />
                 </div>
-                <div className="col p-0">
+                <div className="col m-0 p-0">
                     <NavbarComponent pageTitle={this.pageTitle} />
                     <div className="row m-0 p-0">
                         {keywordsJSX}
@@ -90,10 +93,13 @@ class collectionsPage extends Component {
 }
 
 function objectToArray(inputObject){
-    var resultArray = Object.keys(inputObject).map(function(key) {
+    const resultArray = Object.keys(inputObject).map(function(key) {
         return [key, inputObject[key]];
       });
-    return resultArray
+    const resultAWithoutEmptyObjects = resultArray.filter(obj=>{
+        return obj[0].length > 0
+    })
+    return resultAWithoutEmptyObjects
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(collectionsPage);
