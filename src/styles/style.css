@@ -191,7 +191,9 @@ padding-bottom: 35px;
 .fullHeightPage{
   height: 100vh
 }
-
+a, a:visited,.a:hover,.a:active {
+  text-decoration:none !important;
+}
 /* Searchbar */
 
 #custom-search-input{

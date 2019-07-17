@@ -66,7 +66,7 @@ class SnippetCard extends Component{
 
         const bookmarkedClass = (snippet.bookmarkId)? "text-primary" : " deactiveBookmarkTag";
         return (
-            <div className={"card col-12 ml-2 my-3 snippetCard" +  ((isCreatedByLoggedInUser)?" snippetCardActiveBorder ":"snippetCardDeactiveBorder")} style={{ width: '95%' }}>
+            <div className={"card col-12 ml-2 my-3 snippetCard snippetCardActiveBorder"} style={{ width: '95%' }}>
 
                     <div className="row ">
                         <div className="col-md-12 ">

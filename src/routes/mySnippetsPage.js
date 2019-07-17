@@ -2,23 +2,15 @@ import React, { Component } from 'react'
 import {connect } from 'react-redux'
 import {fetchMySnippets , searchSnippets} from '../store/actions'
 import SnippetCard from '../components/SnippetCard'
-import SingInSignOut from '../components/SingInSignOut'
 import NavbarComponent from '../components/NavbarComponent'
 import SidebarComponent from '../components/SidebarComponent'
-import InputGroup from 'react-bootstrap/InputGroup';
-import Form from 'react-bootstrap/Form';
-import Col from 'react-bootstrap/Col';
-import Button from 'react-bootstrap/Button';
-import Row from 'react-bootstrap/Row';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch,faPlus } from '@fortawesome/free-solid-svg-icons'; 
-import { NavLink } from "react-router-dom";
-
-const SEARCHBOX_DELAY = 500; // add to settings file
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
 
 const mapStateToProps = (state) =>{
     return {
-        snippets : state.snippets
+        snippets : state.snippets,
+        userId : parseInt(cookies.get("user_id"))
     }
 } 
 
@@ -57,7 +49,7 @@ class mySnippetsPage extends Component {
 
         let snippetsJsx = this.props.snippets.map((snippet,index) =>{
             return(
-                <SnippetCard key={"snippetCard" + index} snippet={snippet} />
+                <SnippetCard key={"snippetCard" + index} snippet={snippet} userId={this.props.userId} />
             )
         })
         return (
