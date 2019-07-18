@@ -293,6 +293,57 @@ a, a:visited,.a:hover,.a:active {
 
 
 
+.bookmarkAnimation{
+	-webkit-animation: change-colorBookmark  0.8s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+	        animation: change-colorBookmark 0.8s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+}
+.unBookmarkAnimation {
+	-webkit-animation: change-colorUnBookmark  0.8s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+	        animation: change-colorUnBookmark 0.8s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+}
+
+
+@-webkit-keyframes change-colorBookmark {
+  0% {
+    color: #adb5bd ;
+  }
+  100% {
+    color: #007bff;
+  }
+}
+@keyframes change-colorBookmark {
+  0% {
+    color:#adb5bd;
+  }
+  100% {
+    color:#007bff;
+
+  }
+}
+
+@-webkit-keyframes change-colorUnBookmark {
+  0% {
+    color: #007bff;
+  }
+  100% {
+    color: #adb5bd ;
+  }
+}
+@keyframes change-colorUnBookmark {
+  0% {
+    color:#007bff;
+  }
+  100% {
+    color:#adb5bd;
+
+  }
+}
+
+
+
+
+
+
 /* collection page */
 .collectionPage .card{
   box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.11);

@@ -34,11 +34,13 @@ const mapDispatchToProps = dispatch => {
 class SnippetCard extends Component{
     constructor(props){
         super(props);
+        this.state = {"showAnimation" : false}
 
     }
 
     bookmarkToggle = () =>{
         console.log(this.props.snippet);
+        this.setState({"showAnimation" : true})
         if(this.props.snippet.bookmarkId){
             // already bookmarked -> unBookmark it
             this.props.unBookmarkSnippet(this.props.snippet.id);
@@ -65,20 +67,24 @@ class SnippetCard extends Component{
                                 lettersArray.indexOf(snippet.title[0].toLowerCase());
 
         const bookmarkedClass = (snippet.bookmarkId)? "text-primary" : " deactiveBookmarkTag";
+        const animationType = (snippet.bookmarkId)? " bookmarkAnimation ":" unBookmarkAnimation ";
+
+        const animation = (this.state.showAnimation)? animationType : "";
         return (
-            <div className={"card col-12 ml-2 my-3 snippetCard snippetCardActiveBorder"} style={{ width: '95%' }}>
+            <div className={"card col-12 ml-2 my-3 snippetCard snippetCardActiveBorder" } style={{ width: '95%' }}>
 
                     <div className="row ">
                         <div className="col-md-12 ">
                             <div className="bookmarkTagContainer pointer" onClick={this.bookmarkToggle}>
                                 <FontAwesomeIcon 
                                     
-                                    className={"fontSize20 mx-2  "+ bookmarkedClass} 
+                                    className={"fontSize20 mx-2  "+ bookmarkedClass + animation} 
                                     icon={faBookmark} />
                                     <span 
                                         className={
                                                 " "+((snippet.bookmarkId)? " text-light" : " text-dark")+
                                                 " "+((bookmarkCount < 10)? " oneDigit" : " twoDigit")
+                                                
                                                 
                                                 } >
                                         {bookmarkCount}
