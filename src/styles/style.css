@@ -41,7 +41,22 @@
   position: fixed;
   left:7px;
 }
+.profilePhotoContainer::after{
+  display: none !important;
+}
+.profilePhoto{
+  width: 50px;
+  height: 50px;
+}
 
+.minibutton{
+  background-color: rgb(7, 255, 7);
+  width: 11px;
+  height: 11px;
+  position: absolute;
+  left: 35px;
+  top: 41px;
+}
 
 .noBackground{
   background-color: #00000000 !important;

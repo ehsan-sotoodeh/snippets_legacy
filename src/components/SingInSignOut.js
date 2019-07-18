@@ -92,8 +92,9 @@ function ProfileComponent({profilePhoto,username,handelLogout}){
     return (
         <div>
             <Dropdown alignRight className="mt-4" >
-                <Dropdown.Toggle size="sm" className="noBackground border-0 p-0 m-0" variant="info" direction="up" id="dropdown-basic">
-                    <img className="fontSize12 NavIcon"   src={avatar} />
+                <Dropdown.Toggle size="sm" className="noBackground profilePhotoContainer border-0 p-0 m-0" variant="info" direction="up" id="dropdown-basic">
+                    <img className="profilePhoto fontSize12   rounded-circle "   src={profilePhoto} />
+                    <div className="minibutton fontSize12 border border-light  rounded-circle "   ></div>
                 </Dropdown.Toggle>
                 <Dropdown.Menu className="loginDropDown p-0"  > 
                     <Dropdown.Item className=""   >
