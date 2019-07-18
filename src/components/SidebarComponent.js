@@ -30,7 +30,7 @@ class SidebarComponent extends Component {
         });
 
         return (
-            <div className="sidebar h-100 px-0">
+            <div className="sidebar d-none d-sm-block h-100 px-0 ">
             <img className="logoIcon" src={logo} />
                 <ul className="noBullet text-light">
                         {menuItemsJsx}

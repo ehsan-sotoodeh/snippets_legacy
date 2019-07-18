@@ -54,7 +54,7 @@ class mySnippetsPage extends Component {
         })
         return (
             <div className="fullHeightPage row m-0">
-                <div className="sidebarColumn  p-0">
+                <div className="sidebarColumn d-none d-sm-block p-0">
                     <SidebarComponent  active="mySnippetPage"  />
                 </div>
                 <div className="col p-0">
