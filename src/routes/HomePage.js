@@ -70,7 +70,7 @@ class HomePage extends Component {
         return (
             <div className="fullHeightPage row m-0">
                 <div className="sidebarColumn  p-0">
-                    <SidebarComponent />
+                    <SidebarComponent  active="homePage"  />
                 </div>
                 <div className=" col  p-0">
                     <NavbarWithSearchComponent 

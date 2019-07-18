@@ -179,12 +179,10 @@ class SnippetPage extends Component {
 
         return (
             <div className="snippetPage fullHeightPage row m-0">
-                <div className="sidebarColumn col-1 p-0">
-                    <SidebarComponent />
+                <div className="sidebarColumn  p-0">
+                    <SidebarComponent active="snippetPage" />
                 </div>
-                <div className="col-11 p-0">
-                    <NavbarComponent pageTitle={this.pageTitle} />
-
+                <div className="col p-0">
                     <div className={"mb-1  bg-light " + ((isModifiable)?"":" d-none")}  >
                         <div className="container d-flex bd-highlight justify-content-end ">
                                 <SnippetModifyButtons 

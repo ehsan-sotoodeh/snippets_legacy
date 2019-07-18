@@ -54,10 +54,10 @@ class mySnippetsPage extends Component {
         })
         return (
             <div className="fullHeightPage row m-0">
-                <div className="sidebarColumn col-1 p-0">
-                    <SidebarComponent />
+                <div className="sidebarColumn  p-0">
+                    <SidebarComponent  active="mySnippetPage"  />
                 </div>
-                <div className="col-11 p-0">
+                <div className="col p-0">
                     <NavbarComponent pageTitle={this.pageTitle} />
 
                         {snippetsJsx}
