@@ -52,11 +52,12 @@ class SidebarComponent extends Component {
                 </li>
             )
         });
+        const sidebarActive = this.props.sidebarActive;
 
         return (
             <>
-                <div className="sidebarColumn d-none d-sm-block p-0">
-                    <div className="sidebar d-none d-sm-block h-100 px-0 ">
+                <div className={"sidebarColumn " + ((sidebarActive)?"":" d-none d-sm-block p-0 ") } >
+                    <div className={"sidebar h-100 px-0 " + ((sidebarActive)?"":" d-none d-sm-block ") } >
                     <img className="logoIcon" src={logo} />
                         <ul className="noBullet text-light">
                                 {menuItemsJsx}
