@@ -3,7 +3,8 @@
     ],
     "keywords" : [],
     "view" : {
-        "activeSnippet" : 1
+        "activeSnippet" : 1,
+        "sidebarActive" : false
     },
     "user" :{
 

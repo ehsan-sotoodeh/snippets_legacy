@@ -13,7 +13,8 @@ const constants = {
 
     },
     VIEW : {
-        SET_ACTIVE_SNIPPET : "SET_ACTIVE_SNIPPET"
+        SET_ACTIVE_SNIPPET : "SET_ACTIVE_SNIPPET",
+        TOGGLE_SIDEBAR : "TOGGLE_SIDEBAR"
     },
     USER : {
         USER_LOG_IN : "USER_LOG_IN",

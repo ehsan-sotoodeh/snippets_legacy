@@ -43,7 +43,6 @@ class SnippetService  {
 
     }
     async updateSnippetById(inputSnippet) {
-        console.log(inputSnippet)
         try {
             let inputSnippetString = urlfy(inputSnippet);
             const url = `${this.serverURL}/snippets/id/${inputSnippet.id}?${inputSnippetString}`;
@@ -69,7 +68,6 @@ class SnippetService  {
     async deleteSnippet(snippetId) {
         try {
             const url = `${this.serverURL}/snippets/id/${snippetId}`;
-            console.log(url)
             let snippet = await axios.delete(url,{withCredentials: true})
             return snippet.data
         } catch (error) {
@@ -81,7 +79,6 @@ class SnippetService  {
         try {
             //http://93.188.167.131:3000/snippet/search/items,ccc
             searchTerm = searchTerm.replaceAll(" ", ",");
-            console.log(searchTerm)
             const url = `${this.serverURL}/snippets/search/${searchTerm}`;
             let snippet = await axios.get(url)
             return snippet.data

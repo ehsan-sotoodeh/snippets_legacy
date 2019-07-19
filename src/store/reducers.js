@@ -54,10 +54,16 @@ export const view = (state = {},action)=>{
     switch(action.type){
         case C.VIEW.SET_ACTIVE_SNIPPET :
             return state = [...action.payload];
+        case C.VIEW.TOGGLE_SIDEBAR :
+            console.log(state.sidebarActive)
+            const newState = state;
+            newState.sidebarActive = !state.sidebarActive;
+            return {...newState};
         default:
             return state;
     }
 }
+
 export const user = (state = {},action)=>{
     switch(action.type){ //TODO replace with user actions
         case C.VIEW.SET_ACTIVE_SNIPPET :

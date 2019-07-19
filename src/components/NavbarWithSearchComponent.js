@@ -71,11 +71,10 @@ class NavbarWithSearchComponent extends Component {
 
 
     render(){
-        console.log("render", this.props.searchKey)
         return (
             <Navbar bg="light" expand="lg">
             <Form inline>
-                    <div id="custom-search-input" className="">
+                    <div id="custom-search-input" className="ml-5 ml-sm-1">
                         <div className="input-group ">
                                 <input type="text" className="form-control input-sm" onChange={this.handleSearchInput} value={this.state.searchKey} placeholder="Search..." />
                                 <span className="input-group-btn">

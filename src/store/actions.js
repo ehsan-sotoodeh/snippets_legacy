@@ -80,12 +80,10 @@ export const saveSnippet = (snippet) => async (dispatch , getState) =>{
 
     try{
         let resultSnippet = await SnippetService.saveSnippet(snippet);
-        console.log(resultSnippet)
         dispatch({
             type: C.SNIPPETS.ADD_NEW,
             payload: resultSnippet
         });
-        console.log(resultSnippet)
 
         return resultSnippet;
     }catch(error){
@@ -96,7 +94,6 @@ export const saveSnippet = (snippet) => async (dispatch , getState) =>{
 export const searchSnippets = (SearchTerm) => async (dispatch , getState) =>{
 
     try{
-        console.log(SearchTerm)
         let resultSnippet = await SnippetService.searchSnippets(SearchTerm);
         dispatch({
             type: C.SNIPPETS.FETCH_BY_SEARCH_TERM,
@@ -151,6 +148,19 @@ export const fetchCollection = (snippetId) => async (dispatch , getState) =>{
         });
         
         return collection;
+    }catch(error){
+        return new Error(error)
+
+    }
+}
+
+
+export const toggleSidebar = () => async (dispatch , getState) =>{
+    try{
+        dispatch({
+            type: C.VIEW.TOGGLE_SIDEBAR,
+            payload: ""
+        });
     }catch(error){
         return new Error(error)
 
