@@ -38,8 +38,15 @@ const mapDispatchToProps = dispatch => {
 class SidebarComponent extends Component {
     constructor(props){
         super(props);
-
+        this.state = {
+            showCloseSidebarAnimation : false
+        }
     }
+
+    showCloseAnimation = () =>{
+        this.setState({"showCloseSidebarAnimation":true});
+    }
+
     render(){
         console.log("sidebarActive: " ,this.props.sidebarActive);
         const menuItemsJsx = menuItems.map((menuItem,index) =>{
@@ -53,20 +60,22 @@ class SidebarComponent extends Component {
             )
         });
         const sidebarActive = this.props.sidebarActive;
-
+        const closeSidebarClass = (this.state.showCloseSidebarAnimation)? " slide-left  " : " d-none d-sm-block ";
+        const toggleIconAnimationClass = (sidebarActive)? " down-right " : " up-left "
+        console.log(this.state.showCloseSidebarAnimation)
         return (
             <>
-                <div className={"sidebarColumn " + ((sidebarActive)?"":" d-none d-sm-block p-0 ") } >
+                <div className={"sidebarColumn p-0" + ((sidebarActive)?" slide-right ": closeSidebarClass) } >
                     <div className={"sidebar h-100 px-0 " + ((sidebarActive)?"":" d-none d-sm-block ") } >
-                    <img className="logoIcon" src={logo} />
+                    <img className="logoIcon d-none d-sm-block" src={logo} />
                         <ul className="noBullet text-light">
                                 {menuItemsJsx}
                             <SingInSignOut  />
                         </ul>            
                     </div>
                 </div>
-                <div className="sidebarToggler d-block  d-sm-none" onClick={this.props.toggleSidebar}>
-                    <img className="sidebarTogglerArrow " src={arrow} alt="arrow" /> 
+                <div className="sidebarToggler d-block  d-sm-none" onClick={()=>{this.props.toggleSidebar(); this.showCloseAnimation()}}>
+                    <img className={"sidebarTogglerArrow " + toggleIconAnimationClass} src={arrow} alt="arrow" /> 
                 </div> 
             </>
         )

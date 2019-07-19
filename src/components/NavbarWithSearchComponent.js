@@ -1,26 +1,21 @@
 import React,{Component} from 'react'
 import {connect } from 'react-redux'
 import { searchSnippets} from '../store/actions'
-import queryString from 'query-string';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
-import Row from 'react-bootstrap/Row';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch,faPlus,faTimes } from '@fortawesome/free-solid-svg-icons'; 
-import { NavLink } from "react-router-dom";
-import SingInSignOut from './SingInSignOut'
+import { faSearch,faTimes } from '@fortawesome/free-solid-svg-icons'; 
 import Navbar from 'react-bootstrap/Navbar'
-import Nav from 'react-bootstrap/Nav'
-import FormControl from 'react-bootstrap/FormControl'
-import NavDropdown from 'react-bootstrap/NavDropdown'
+
 
 const SEARCHBOX_DELAY = 500; // add to settings file
 
 const mapStateToProps = (state) =>{
     return {
-        snippets : state.snippets
+        snippets : state.snippets,
+        sidebarActive : state.view.sidebarActive
     }
 }
 
@@ -37,7 +32,9 @@ class NavbarWithSearchComponent extends Component {
     delayTimer;
     constructor(props){
         super(props);
-        this.state = {searchKey:this.props.searchKey};
+        this.state = {
+            searchKey:this.props.searchKey,
+        };
 
     }
 
@@ -68,11 +65,13 @@ class NavbarWithSearchComponent extends Component {
 
     }
 
-
+  
 
     render(){
+
+        const sidebarActive = this.props.sidebarActive;
         return (
-            <Navbar bg="light" expand="lg">
+            <Navbar bg="light" expand="lg" className={" navbarWithSearch " + ((sidebarActive)?" slide-bottom ":" slide-up  d-none d-sm-block ")}>
             <Form inline>
                     <div id="custom-search-input" className="ml-5 ml-sm-1">
                         <div className="input-group ">
