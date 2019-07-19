@@ -6,6 +6,8 @@ import NavbarWithSearchComponent from '../components/NavbarWithSearchComponent'
 import SidebarComponent from '../components/SidebarComponent'
 import queryString from 'query-string';
 import Cookies from 'universal-cookie';
+import arrow from '../images/icons/arrow.svg'
+
 const cookies = new Cookies();
 
 
@@ -71,6 +73,9 @@ class HomePage extends Component {
             <div className="fullHeightPage row m-0">
                 <div className="sidebarColumn d-none d-sm-block p-0">
                     <SidebarComponent  active="homePage"  />
+                </div>
+                <div className="sidebarToggler">
+                    <img className="sidebarTogglerArrow" src={arrow} alt="arrow" /> 
                 </div>
                 <div className=" col  p-0">
                     <NavbarWithSearchComponent 

@@ -4,9 +4,8 @@ import Cookies from 'universal-cookie';
 import Dropdown from 'react-bootstrap/Dropdown';
 import {connect } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome' 
-import { faKey,faUser,faSignOutAlt } from '@fortawesome/free-solid-svg-icons'  
+import { faKey,faSignOutAlt } from '@fortawesome/free-solid-svg-icons'  
 import { faFacebook,faTwitter,faGooglePlus } from '@fortawesome/free-brands-svg-icons'  
-import avatar from '../images/icons/avatar.svg'
 
 const cookies = new Cookies();
 
