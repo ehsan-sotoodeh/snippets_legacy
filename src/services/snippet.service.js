@@ -6,6 +6,8 @@ axios.defaults.withCredentials = true
 
 class SnippetService  {
     constructor(){
+        console.log("process: ",process)
+        console.log("process: ", process.env.REACT_APP_SERVER_ADDRESS)
         this.serverURL = process.env.REACT_APP_SERVER_ADDRESS;
     }
     

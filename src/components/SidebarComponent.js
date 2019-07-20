@@ -48,7 +48,6 @@ class SidebarComponent extends Component {
     }
 
     render(){
-        console.log("sidebarActive: " ,this.props.sidebarActive);
         const menuItemsJsx = menuItems.map((menuItem,index) =>{
             return(
                 <li key={"menuItem" + index}>
@@ -62,7 +61,6 @@ class SidebarComponent extends Component {
         const sidebarActive = this.props.sidebarActive;
         const closeSidebarClass = (this.state.showCloseSidebarAnimation)? " slide-left  " : " d-none d-sm-block ";
         const toggleIconAnimationClass = (sidebarActive)? " down-right " : " up-left "
-        console.log(this.state.showCloseSidebarAnimation)
         return (
             <>
                 <div className={"sidebarColumn p-0" + ((sidebarActive)?" slide-right ": closeSidebarClass) } >
