@@ -73,7 +73,7 @@ class NavbarWithSearchComponent extends Component {
         return (
             <Navbar bg="light" expand="lg" className={" navbarWithSearch " + ((sidebarActive)?" slide-bottom ":" slide-up  d-none d-sm-block ")}>
             <Form inline>
-                    <div id="custom-search-input" className="ml-5 ml-sm-1">
+                    <div id="custom-search-input" className="">
                         <div className="input-group ">
                                 <input type="text" className="form-control input-sm" onChange={this.handleSearchInput} value={this.state.searchKey} placeholder="Search..." />
                                 <span className="input-group-btn">

@@ -179,9 +179,7 @@ class SnippetPage extends Component {
 
         return (
             <div className="snippetPage fullHeightPage row m-0">
-                <div className="sidebarColumn d-none d-sm-block p-0">
-                    <SidebarComponent active="snippetPage" />
-                </div>
+                <SidebarComponent  />
                 <div className="col p-0">
                     <div className={"mb-1  bg-light " + ((isModifiable)?"":" d-none")}  >
                         <div className="container d-flex bd-highlight justify-content-end ">

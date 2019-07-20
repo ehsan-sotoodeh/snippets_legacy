@@ -54,9 +54,7 @@ class mySnippetsPage extends Component {
         })
         return (
             <div className="fullHeightPage row m-0">
-                <div className="sidebarColumn d-none d-sm-block p-0">
-                    <SidebarComponent  active="mySnippetPage"  />
-                </div>
+                <SidebarComponent    />
                 <div className="col p-0">
                     <NavbarComponent pageTitle={this.pageTitle} />
 
