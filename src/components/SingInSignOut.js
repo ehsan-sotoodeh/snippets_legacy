@@ -31,6 +31,7 @@ class  SingInSignOut extends Component {
             profilePhoto: cookies.get('user_profile_photo'),
             token: cookies.get('auth_token')
          }
+         console.log(this.state)
         this.handelLogin = this.handelLogin.bind(this);
     }
     
@@ -40,12 +41,12 @@ class  SingInSignOut extends Component {
         console.log(this.history)
         //this.props.history.push(":3000/");
         let res = window.open(process.env.REACT_APP_SERVER_ADDRESS+"/auth/google", "_blank");
-
+        console.log(res)
         //window.location.replace("http://localhost:4000/auth/google");
         setInterval(()=>{
             console.log(res.closed);
             if(res.closed)
-                window.location.reload();
+                //window.location.reload();
 
         },1000)
     }
