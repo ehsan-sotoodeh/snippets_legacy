@@ -6,6 +6,7 @@ import {connect } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome' 
 import { faKey,faSignOutAlt } from '@fortawesome/free-solid-svg-icons'  
 import { faFacebook,faTwitter,faGooglePlus } from '@fortawesome/free-brands-svg-icons'  
+require('dotenv').config()
 
 const cookies = new Cookies();
 
@@ -38,7 +39,7 @@ class  SingInSignOut extends Component {
         let loginMethod = event.target.name;
         console.log(this.history)
         //this.props.history.push(":3000/");
-        let res = window.open("http://localhost:4000/auth/google", "_blank");
+        let res = window.open(process.env.REACT_APP_SERVER_ADDRESS+"/auth/google", "_blank");
 
         //window.location.replace("http://localhost:4000/auth/google");
         setInterval(()=>{
@@ -49,7 +50,7 @@ class  SingInSignOut extends Component {
         },1000)
     }
     handelLogout = ()=>{
-        window.location.replace("http://localhost:4000/auth/logout");
+        window.location.replace( process.env.REACT_APP_SERVER_ADDRESS+ "/auth/logout");
 
     }
 
