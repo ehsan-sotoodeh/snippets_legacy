@@ -48,7 +48,7 @@ class  SingInSignOut extends Component {
         setInterval(()=>{
             console.log(res.closed);
             if(res.closed){
-                //window.location.reload();
+                window.location.reload();
             }
 
         },1000)
