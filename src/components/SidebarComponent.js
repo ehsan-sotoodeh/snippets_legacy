@@ -21,7 +21,7 @@ const menuItems = [
 
 const mapStateToProps = (state) =>{
     return {
-        sidebarActive : state.view.sidebarActive,
+        sidebarActive : state.view.sidebarActive
     }
 }
 

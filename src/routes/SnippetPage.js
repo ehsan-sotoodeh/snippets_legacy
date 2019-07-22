@@ -1,14 +1,12 @@
 import React, { Component } from 'react'
 import {connect } from 'react-redux'
-import {fetchAllSnippets,fetchOneSnippetById,deleteSnippet,updateSnippet,saveSnippet} from '../store/actions'
-import { NavLink } from "react-router-dom";
+import {fetchOneSnippetById,deleteSnippet,updateSnippet,saveSnippet} from '../store/actions'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome,faUndo,faPen,faTimes,faCloudUploadAlt } from '@fortawesome/free-solid-svg-icons';
+import { faUndo,faPen,faTimes,faCloudUploadAlt,faExclamation } from '@fortawesome/free-solid-svg-icons';
 import RichEditorExample from '../components/RichEditorExample'
 import Cookies from 'universal-cookie';
 import SidebarComponent from '../components/SidebarComponent'
-import NavbarComponent from '../components/NavbarComponent'
-
+import Alert from 'react-bootstrap/Alert'
 const cookies = new Cookies();
 
 const mapStateToProps = (state) =>{
@@ -154,7 +152,6 @@ class SnippetPage extends Component {
 
     render() {
 
-
         if(this.isNewSnippet){
             //its a new snippet
             this.snippet.id = -1
@@ -181,7 +178,7 @@ class SnippetPage extends Component {
             <div className="snippetPage fullHeightPage row m-0">
                 <SidebarComponent  />
                 <div className="col p-0">
-                    <div className={"mb-1  bg-light " + ((isModifiable)?"":" d-none")}  >
+                    <div className={"mb-1  bg-light " + ((isModifiable)?"":" ")}  >
                         <div className="container d-flex bd-highlight justify-content-end ">
                                 <SnippetModifyButtons 
                                     saveSnippet={this.saveSnippet}
@@ -190,7 +187,7 @@ class SnippetPage extends Component {
                                     deleteSnippet={this.deleteSnippet}
                                     isNewSnippet={this.isNewSnippet}
                                     isUpdateButtonActive={isUpdateButtonActive}
-                                    
+                                    isUserLoggedIn={((this.props.userId)?true:false)}
                                     />
                         </div>
                     
@@ -245,7 +242,16 @@ class SnippetPage extends Component {
 }
 
 
-function SnippetModifyButtons({saveSnippet,updateSnippet,refreshSnippet,deleteSnippet,isNewSnippet,isUpdateButtonActive}){
+function SnippetModifyButtons({saveSnippet,updateSnippet,refreshSnippet,deleteSnippet,isNewSnippet,isUpdateButtonActive,isUserLoggedIn}){
+    if(!isUserLoggedIn){
+        return(
+            <Alert className="mt-2 mr-auto" key="alert" variant="warning">
+                <FontAwesomeIcon icon={faExclamation} /> &nbsp; Please login to add or modify snippets.
+            </Alert>
+        )
+    }
+
+
     const saveUpdateButtonJsx = (isNewSnippet)?(
         <button className={"btn btn-info  " + ((isUpdateButtonActive)? "":"disabled") }  onClick={()=>{saveSnippet()}}> <FontAwesomeIcon icon={faCloudUploadAlt} />&nbsp; &nbsp; Save </button>
     ):(
