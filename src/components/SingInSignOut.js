@@ -26,7 +26,7 @@ const mapDispatchToProps = dispatch => {
 class  SingInSignOut extends Component {
     constructor(props){
         super(props);
-        cookies.set('myCat', 'Pacman');
+        cookies.set('activeCookie', 'true');
 
         console.log("cookies",cookies.getAll())
         this.state = {
@@ -49,7 +49,7 @@ class  SingInSignOut extends Component {
         setInterval(()=>{
             console.log(res.closed);
             if(res.closed){
-                //window.location.reload();
+                window.location.reload();
             }
 
         },1000)
