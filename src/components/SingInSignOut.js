@@ -26,7 +26,9 @@ const mapDispatchToProps = dispatch => {
 class  SingInSignOut extends Component {
     constructor(props){
         super(props);
-        console.log("cookies",cookies)
+        cookies.set('myCat', 'Pacman');
+
+        console.log("cookies",cookies.getAll())
         this.state = {
             username: cookies.get('user_username'),
             profilePhoto: cookies.get('user_profile_photo'),
