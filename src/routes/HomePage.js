@@ -36,6 +36,18 @@ class HomePage extends Component {
         super(props);
         this.pageTitle = "Snippets"
         let params = queryString.parse(this.props.location.search);
+        console.log("auth_token",)
+        if(params['auth_token']){
+            //login landing 
+            for (let [key, value] of Object.entries(params)) {
+                cookies.set(key, value, { path: '/' });
+    
+            }
+    
+            window.close();
+        }
+
+
         if(params.search){
             this.state = {searchKey:params.search};
         }else{

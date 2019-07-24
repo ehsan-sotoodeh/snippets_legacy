@@ -17,12 +17,7 @@ class loginRedirect extends Component {
         super(props);
         let params = queryString.parse(this.props.location.search);
 
-        for (let [key, value] of Object.entries(params)) {
-            cookies.set(key, value, { path: '/' });
 
-        }
-
-        window.close();
 
 
 
