@@ -6,7 +6,6 @@ import SnippetPage from './routes/SnippetPage'
 import Page404 from './routes/Page404'
 import mySnippetsPage from './routes/mySnippetsPage'
 import collectionsPage from './routes/collectionsPage'
-import loginRedirect from './routes/loginRedirect'
 
 function App() {
   return (
