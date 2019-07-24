@@ -12,7 +12,7 @@ const cookies = new Cookies();
 
 
 
-class LoginRedirect extends Component {
+class loginRedirect extends Component {
     constructor(props){
         super(props);
         let params = queryString.parse(this.props.location.search);
@@ -42,4 +42,4 @@ class LoginRedirect extends Component {
 
 
 
-export default LoginRedirect;
+export default loginRedirect;

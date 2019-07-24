@@ -6,7 +6,7 @@ import SnippetPage from './routes/SnippetPage'
 import Page404 from './routes/Page404'
 import mySnippetsPage from './routes/mySnippetsPage'
 import collectionsPage from './routes/collectionsPage'
-import LoginRedirect from './routes/LoginRedirect'
+import loginRedirect from './routes/loginRedirect'
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
                 <Route path="/snippet/:snippetId" component={SnippetPage}/>
                 <Route path="/mySnippets" component={mySnippetsPage}/>
                 <Route path="/collections" component={collectionsPage}/>
-                <Route path="/loginRedirect" component={LoginRedirect}/> 
+                <Route path="/loginRedirect" component={loginRedirect}/> 
                 <Route  component={Page404}/>
               </Switch>
             </div>
