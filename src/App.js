@@ -18,7 +18,7 @@ function App() {
                 <Route path="/snippet/:snippetId" component={SnippetPage}/>
                 <Route path="/mySnippets" component={mySnippetsPage}/>
                 <Route path="/collections" component={collectionsPage}/>
-                <Route path="/loginRedirect" component={LoginRedirect}/>
+                <Route path="/loginRedirect" component={LoginRedirect}/> 
                 <Route  component={Page404}/>
               </Switch>
             </div>
